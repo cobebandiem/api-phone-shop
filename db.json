@@ -1,0 +1,51 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "dung",
+      "password": "123456"
+    }
+  ],
+  "products": [
+    {
+      "id": "30",
+      "name": "name 30",
+      "price": 1,
+      "quantity": 48,
+      "image": "image 30",
+      "color": "color 30",
+      "description": "description 30",
+      "type": "type 30"
+    },
+    {
+      "id": "33",
+      "name": "name 33",
+      "price": 15,
+      "quantity": 52,
+      "image": "image 33",
+      "color": "color 33",
+      "description": "description 33",
+      "type": "type 33"
+    },
+    {
+      "id": "34",
+      "name": "name 34",
+      "price": 81,
+      "quantity": 61,
+      "image": "image 34",
+      "color": "color 34",
+      "description": "description 34",
+      "type": "type 34"
+    },
+    {
+      "id": "35",
+      "name": "name 35",
+      "price": 66,
+      "quantity": 83,
+      "image": "image 35",
+      "color": "color 35",
+      "description": "description 35",
+      "type": "type 35"
+    }
+  ]
+}
