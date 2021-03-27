@@ -1,6 +1,15 @@
-const express = require('express')
-const app = express()
-const port = 3000
+// const express = require('express')
+// const app = express()
+// // const port = 3000
+// const server = app.listen(process.env.PORT || 3000, () => {
+//     console.log(`SERVER running`);
+// });'
+  
+const express = require('express');
+const app = express();
+const server = app.listen(process.env.PORT || 3000, () => {
+    console.log(`SERVER running`);
+});
 const low = require('lowdb')
 const FileSync = require('lowdb/adapters/FileSync')
 const adapter = new FileSync('db.json')
@@ -148,11 +157,11 @@ app.post('/login',(req,res)=>{
 
 
 
-app.get('/login', (req, res) => {
-    console.log(req.body)
-    res.send('hello')
-})
+// app.get('/login', (req, res) => {
+//     console.log(req.body)
+//     res.send('hello')
+// })
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
-})
+// app.listen(port, () => {
+//   console.log(`Example app listening at http://localhost:${port}`)
+// })
