@@ -12,6 +12,10 @@ app.set('views','./views');
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true }))
 
+app.get('/',(req,res)=>{
+    const products=db.get('products').value()
+    res.json(products);
+})
 
 app.get('/products',(req,res)=>{
     const products=db.get('products').value()
