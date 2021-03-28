@@ -9,43 +9,25 @@
   "products": [
     {
       "id": "30",
-      "name": "name 30",
-      "price": 1,
-      "quantity": 48,
-      "image": "image 30",
-      "color": "color 30",
-      "description": "description 30",
-      "type": "type 30"
-    },
-    {
-      "id": "33",
-      "name": "name 33",
-      "price": 15,
-      "quantity": 52,
-      "image": "image 33",
-      "color": "color 33",
-      "description": "description 33",
-      "type": "type 33"
-    },
-    {
-      "id": "34",
-      "name": "name 34",
-      "price": 81,
-      "quantity": 61,
-      "image": "image 34",
-      "color": "color 34",
-      "description": "description 34",
-      "type": "type 34"
-    },
-    {
-      "id": "35",
-      "name": "name 35",
-      "price": 66,
-      "quantity": 83,
-      "image": "image 35",
-      "color": "color 35",
-      "description": "description 35",
-      "type": "type 35"
+      "name": "",
+      "brand": 1,
+      "description": [
+        "Tất cả iPhone chính hãng VN/A được phân phối tại Hoàng Hà Mobile đều được nhập trực tiếp từ Công ty TNHH Apple Việt Nam. HoangHa Mobile là nhà bán lẻ ủy quyền chính thức của Apple tại Việt Nam.",
+        "https://hoanghamobile.com/Uploads/Content/2020/10/14/apple--dien-thoai-di-dong-apple-iphone-12-mini-64gb-chinh-hang-vn-a-1.JPG",
+        "iPhone 12 Mini – chiếc điện thoại “em út” trong thế hệ iPhone 12 năm nay đã chính thức được ra mắt. Mang trong mình những cải tiến vượt trội về hiệu năng trong một thân hình nhỏ bé, iPhone 12 Mini hứa hẹn sẽ làm bùng nổ thị trường di động trong thời gian tới."
+      ],
+      "details": [
+        "Công nghệ màn hình: OLED",
+        "Độ phân giải: Full HD+ (1080 x 2340 Pixels)",
+        "Màn hình rộng: 5.4",
+        "Tốc độ CPU: 2 nhân 3.1 GHz & 4 nhân 1.8 GHz",
+        "Hệ điều hành: iOS 14"
+      ],
+      "type":{
+        "color":"black",
+        "price":123456789,
+        "image":"https://hoanghamobile.com/i/preview/Uploads/2020/11/06/apple-iphone-12-mini.png"
+      }
     }
   ]
 }
