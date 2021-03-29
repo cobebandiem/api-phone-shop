@@ -56,10 +56,10 @@ app.put('/products/:id',(req,res)=>{
 })
 app.delete('/products/:id',(req,res)=>{
     const id=req.params.id;
-    db.get('products')
+    const rs=db.get('products')
         .remove({ id: id })
         .write()
-    res.send('success');
+    res.send(rs);
 })
 app.post('/login',(req,res)=>{
     const {username, password}=req.body;
