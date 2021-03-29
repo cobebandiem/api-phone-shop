@@ -47,7 +47,7 @@ app.post('/products',(req,res)=>{
     res.json('success');
 })
 app.put('/products/:id',(req,res)=>{
-    const id=req.params.id;
+    const id=parseInt(req.params.id);
     let product=db.get('products')
         .find({ id: id })
         .assign(req.body)
@@ -55,7 +55,7 @@ app.put('/products/:id',(req,res)=>{
     res.json(product);
 })
 app.delete('/products/:id',(req,res)=>{
-    const id=req.params.id;
+    const id=parseInt(req.params.id);
     const rs=db.get('products')
         .remove({ id: id })
         .write()
