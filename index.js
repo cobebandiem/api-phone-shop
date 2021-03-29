@@ -37,7 +37,13 @@ app.get('/products/:id',(req,res)=>{
 })
 app.post('/products',(req,res)=>{
     console.log(req.body);
-    db.get('products').push(req.body).write();
+    const products=db.get('products').value();
+    let id=products[products.length-1].id + 1;
+    let product={
+        ...req.body,
+        id
+    }
+    db.get('products').push(product).write();
     res.json('success');
 })
 app.put('/products/:id',(req,res)=>{
