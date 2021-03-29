@@ -23,12 +23,10 @@
         "Tốc độ CPU: 2 nhân 3.1 GHz & 4 nhân 1.8 GHz",
         "Hệ điều hành: iOS 14"
       ],
-      "type":{
-        "color":"black",
-        "price":123456789,
-        "image":"apple-iphone-12-mini.png",
-        "sale":15
-      }
+      "color":"black",
+      "price":123456789,
+      "image":"apple-iphone-12-mini.png",
+      "sale":15
     },
     {
       "id": 2,
@@ -46,13 +44,12 @@
         "Tốc độ CPU: 2 nhân 3.1 GHz & 4 nhân 1.8 GHz",
         "Hệ điều hành: iOS 14"
       ],
-      "type":{
-        "color":"black",
-        "price":123456789,
-        "image":"apple-iphone-12-mini.png",
-        "sale":15
-      }
-    },{
+      "color":"black",
+      "price":123456789,
+      "image":"apple-iphone-12-mini.png",
+      "sale":15
+    },
+    {
       "id": 3,
       "name": "Apple iPhone 12 Mini - 64GB - Chính hãng VN/A",
       "brand": "Iphone",
@@ -68,12 +65,10 @@
         "Tốc độ CPU: 2 nhân 3.1 GHz & 4 nhân 1.8 GHz",
         "Hệ điều hành: iOS 14"
       ],
-      "type":{
-        "color":"black",
-        "price":123456789,
-        "image":"apple-iphone-12-mini.png",
-        "sale":15
-      }
+      "color":"black",
+      "price":123456789,
+      "image":"apple-iphone-12-mini.png",
+      "sale":15
     }
   ]
 }
