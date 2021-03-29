@@ -26,7 +26,8 @@
       "type":{
         "color":"black",
         "price":123456789,
-        "image":"https://hoanghamobile.com/i/preview/Uploads/2020/11/06/apple-iphone-12-mini.png"
+        "image":"apple-iphone-12-mini.png",
+        "sale":15
       }
     }
   ]
