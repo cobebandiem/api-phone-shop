@@ -31,6 +31,56 @@
         "apple-iphone-12-mini-3.png"
       ],
       "sale":15
+    },
+    {
+      "id": 2,
+      "name": "Apple iPhone 12 Mini - 64GB - Chính hãng VN/A",
+      "brand": "Iphone",
+      "description": [
+        "Tất cả iPhone chính hãng VN/A được phân phối tại Hoàng Hà Mobile đều được nhập trực tiếp từ Công ty TNHH Apple Việt Nam. HoangHa Mobile là nhà bán lẻ ủy quyền chính thức của Apple tại Việt Nam.",
+        "https://hoanghamobile.com/Uploads/Content/2020/10/14/apple--dien-thoai-di-dong-apple-iphone-12-mini-64gb-chinh-hang-vn-a-1.JPG",
+        "iPhone 12 Mini – chiếc điện thoại “em út” trong thế hệ iPhone 12 năm nay đã chính thức được ra mắt. Mang trong mình những cải tiến vượt trội về hiệu năng trong một thân hình nhỏ bé, iPhone 12 Mini hứa hẹn sẽ làm bùng nổ thị trường di động trong thời gian tới."
+      ],
+      "details": [
+        "Công nghệ màn hình: OLED",
+        "Độ phân giải: Full HD+ (1080 x 2340 Pixels)",
+        "Màn hình rộng: 5.4",
+        "Tốc độ CPU: 2 nhân 3.1 GHz & 4 nhân 1.8 GHz",
+        "Hệ điều hành: iOS 14"
+      ],
+      "color":"black",
+      "price":123456789,
+      "image":[
+        "apple-iphone-12-mini.png",
+        "apple-iphone-12-mini-2.png",
+        "apple-iphone-12-mini-3.png"
+      ],
+      "sale":15
+    },
+    {
+      "id": 3,
+      "name": "Apple iPhone 12 Mini - 64GB - Chính hãng VN/A",
+      "brand": "Iphone",
+      "description": [
+        "Tất cả iPhone chính hãng VN/A được phân phối tại Hoàng Hà Mobile đều được nhập trực tiếp từ Công ty TNHH Apple Việt Nam. HoangHa Mobile là nhà bán lẻ ủy quyền chính thức của Apple tại Việt Nam.",
+        "https://hoanghamobile.com/Uploads/Content/2020/10/14/apple--dien-thoai-di-dong-apple-iphone-12-mini-64gb-chinh-hang-vn-a-1.JPG",
+        "iPhone 12 Mini – chiếc điện thoại “em út” trong thế hệ iPhone 12 năm nay đã chính thức được ra mắt. Mang trong mình những cải tiến vượt trội về hiệu năng trong một thân hình nhỏ bé, iPhone 12 Mini hứa hẹn sẽ làm bùng nổ thị trường di động trong thời gian tới."
+      ],
+      "details": [
+        "Công nghệ màn hình: OLED",
+        "Độ phân giải: Full HD+ (1080 x 2340 Pixels)",
+        "Màn hình rộng: 5.4",
+        "Tốc độ CPU: 2 nhân 3.1 GHz & 4 nhân 1.8 GHz",
+        "Hệ điều hành: iOS 14"
+      ],
+      "color":"black",
+      "price":123456789,
+      "image":[
+        "apple-iphone-12-mini.png",
+        "apple-iphone-12-mini-2.png",
+        "apple-iphone-12-mini-3.png"
+      ],
+      "sale":15
     }
   ]
 }
