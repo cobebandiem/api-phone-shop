@@ -25,7 +25,7 @@
       ],
       "color":"black",
       "price":123456789,
-      "image":[
+      "images":[
         "apple-iphone-12-mini.png",
         "apple-iphone-12-mini-2.png",
         "apple-iphone-12-mini-3.png"
@@ -50,7 +50,7 @@
       ],
       "color":"black",
       "price":123456789,
-      "image":[
+      "images":[
         "apple-iphone-12-mini.png",
         "apple-iphone-12-mini-2.png",
         "apple-iphone-12-mini-3.png"
@@ -75,7 +75,7 @@
       ],
       "color":"black",
       "price":123456789,
-      "image":[
+      "images":[
         "apple-iphone-12-mini.png",
         "apple-iphone-12-mini-2.png",
         "apple-iphone-12-mini-3.png"
