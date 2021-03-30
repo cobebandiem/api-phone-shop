@@ -30,7 +30,8 @@
         "apple-iphone-12-mini-2.png",
         "apple-iphone-12-mini-3.png"
       ],
-      "sale":15
+      "sale":15,
+      "quantity":25
     },
     {
       "id": 2,
@@ -55,7 +56,8 @@
         "apple-iphone-12-mini-2.png",
         "apple-iphone-12-mini-3.png"
       ],
-      "sale":15
+      "sale":15,
+      "quantity":21
     },
     {
       "id": 3,
@@ -80,7 +82,8 @@
         "apple-iphone-12-mini-2.png",
         "apple-iphone-12-mini-3.png"
       ],
-      "sale":15
+      "sale":15,
+      "quantity":12
     }
   ]
 }
