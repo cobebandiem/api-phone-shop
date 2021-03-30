@@ -31,12 +31,11 @@ app.get('/products',(req,res)=>{
     res.json(products);
 })
 app.get('/products/:id',(req,res)=>{
-    const id=req.params.id;
+    const id=parseInt(req.params.id);
     const product=db.get('products').find({id:id}).value()
     res.json(product);
 })
 app.post('/products',(req,res)=>{
-    console.log(req.body);
     const products=db.get('products').value();
     let id=products[products.length-1].id + 1;
     let product={
