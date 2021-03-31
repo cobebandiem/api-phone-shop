@@ -78,6 +78,7 @@ app.post('/login',(req,res)=>{
             token:token
         });
     }else{
+        res.status=404;
         res.json({
             message:'faulty'
         });
