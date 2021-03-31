@@ -49,7 +49,7 @@ app.put('/products/:id',(req,res)=>{
     let id=parseInt(req.params.id);
     let bodyFake={
         ...req.body,
-        id:parseInt(body.id)
+        id:parseInt(req.body.id)
     }
     let product=db.get('products')
         .find({ id: id })
