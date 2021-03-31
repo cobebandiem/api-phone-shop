@@ -27,26 +27,26 @@ app.get('/',(req,res)=>{
 })
 
 app.get('/products',(req,res)=>{
-    const products=db.get('products').value()
+    let products=db.get('products').value()
     res.json(products);
 })
 app.get('/products/:id',(req,res)=>{
-    const id=parseInt(req.params.id);
-    const product=db.get('products').find({id:id}).value()
+    let id=parseInt(req.params.id);
+    let product=db.get('products').find({id:id}).value()
     res.json(product);
 })
 app.post('/products',(req,res)=>{
-    const products=db.get('products').value();
+    let products=db.get('products').value();
     let id=products[products.length-1].id + 1;
     let product={
         ...req.body,
-        id
+        id:parseInt(id)
     }
     db.get('products').push(product).write();
     res.json('success');
 })
 app.put('/products/:id',(req,res)=>{
-    const id=parseInt(req.params.id);
+    let id=parseInt(req.params.id);
     let product=db.get('products')
         .find({ id: id })
         .assign(req.body)
@@ -54,8 +54,8 @@ app.put('/products/:id',(req,res)=>{
     res.json(product);
 })
 app.delete('/products/:id',(req,res)=>{
-    const id=parseInt(req.params.id);
-    const rs=db.get('products')
+    let id=parseInt(req.params.id);
+    let rs=db.get('products')
         .remove({ id: id })
         .write()
     res.send(rs);
