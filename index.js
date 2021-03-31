@@ -49,11 +49,11 @@ app.put('/products/:id',(req,res)=>{
     let id=parseInt(req.params.id);
     let bodyFake={
         ...req.body,
-        id:parseInt(req.body.id)
+        id:parseInt(body.id)
     }
     let product=db.get('products')
         .find({ id: id })
-        .assign(req.body)
+        .assign(bodyFake)
         .write()
     res.json(product);
 })
