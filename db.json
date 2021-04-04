@@ -2,8 +2,49 @@
   "users": [
     {
       "id": 1,
-      "username": "dung",
-      "password": "123456"
+      "username": "0944748742",
+      "password": "123456",
+      "address": "97 man thien quan 9 hcm",
+      "status": true,
+      "idCart": 1
+    }
+  ],
+  "carts": [
+    {
+      "id": 1,
+      "products": [
+        {
+          "idProduct": 1,
+          "quantityOrder": 3
+        },
+        {
+          "idProduct": 2,
+          "quantityOrder": 11
+        },
+        {
+          "idProduct": 3,
+          "quantityOrder": 3
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "products": []
+    }
+  ],
+  "sold": [
+    {
+      "id": 1,
+      "products": [
+        {
+          "idProduct": 1,
+          "quantityOrder": 3
+        },
+        {
+          "idProduct": 2,
+          "quantityOrder": 1
+        }
+      ]
     }
   ],
   "products": [
@@ -23,15 +64,17 @@
         "Tốc độ CPU: 2 nhân 3.1 GHz & 4 nhân 1.8 GHz",
         "Hệ điều hành: iOS 14"
       ],
-      "color":"black",
-      "price":123456789,
-      "images":[
+      "color": "black",
+      "price": 123456789,
+      "images": [
         "apple-iphone-12-mini.png",
         "apple-iphone-12-mini-2.png",
         "apple-iphone-12-mini-3.png"
       ],
-      "sale":15,
-      "quantity":25
+      "sale": 15,
+      "quantity": 25,
+      "idProduct": "1",
+      "quantityOrder": 2
     },
     {
       "id": 2,
@@ -49,15 +92,15 @@
         "Tốc độ CPU: 2 nhân 3.1 GHz & 4 nhân 1.8 GHz",
         "Hệ điều hành: iOS 14"
       ],
-      "color":"black",
-      "price":123456789,
-      "images":[
+      "color": "black",
+      "price": 123456789,
+      "images": [
         "apple-iphone-12-mini.png",
         "apple-iphone-12-mini-2.png",
         "apple-iphone-12-mini-3.png"
       ],
-      "sale":15,
-      "quantity":21
+      "sale": 15,
+      "quantity": 21
     },
     {
       "id": 3,
@@ -75,15 +118,15 @@
         "Tốc độ CPU: 2 nhân 3.1 GHz & 4 nhân 1.8 GHz",
         "Hệ điều hành: iOS 14"
       ],
-      "color":"black",
-      "price":123456789,
-      "images":[
+      "color": "black",
+      "price": 123456789,
+      "images": [
         "apple-iphone-12-mini.png",
         "apple-iphone-12-mini-2.png",
         "apple-iphone-12-mini-3.png"
       ],
-      "sale":15,
-      "quantity":12
+      "sale": 15,
+      "quantity": 12
     },
     {
       "id": 4,
@@ -101,15 +144,15 @@
         "Tốc độ CPU: 2 nhân 3.1 GHz & 4 nhân 1.8 GHz",
         "Hệ điều hành: iOS 14"
       ],
-      "color":"black",
-      "price":123456789,
-      "images":[
+      "color": "black",
+      "price": 123456789,
+      "images": [
         "apple-iphone-12-mini.png",
         "apple-iphone-12-mini-2.png",
         "apple-iphone-12-mini-3.png"
       ],
-      "sale":15,
-      "quantity":12
+      "sale": 15,
+      "quantity": 12
     },
     {
       "id": 5,
@@ -127,15 +170,15 @@
         "Tốc độ CPU: 2 nhân 3.1 GHz & 4 nhân 1.8 GHz",
         "Hệ điều hành: iOS 14"
       ],
-      "color":"black",
-      "price":123456789,
-      "images":[
+      "color": "black",
+      "price": 123456789,
+      "images": [
         "apple-iphone-12-mini.png",
         "apple-iphone-12-mini-2.png",
         "apple-iphone-12-mini-3.png"
       ],
-      "sale":15,
-      "quantity":12
+      "sale": 15,
+      "quantity": 12
     },
     {
       "id": 6,
@@ -153,15 +196,15 @@
         "Tốc độ CPU: 2 nhân 3.1 GHz & 4 nhân 1.8 GHz",
         "Hệ điều hành: iOS 14"
       ],
-      "color":"black",
-      "price":123456789,
-      "images":[
+      "color": "black",
+      "price": 123456789,
+      "images": [
         "apple-iphone-12-mini.png",
         "apple-iphone-12-mini-2.png",
         "apple-iphone-12-mini-3.png"
       ],
-      "sale":15,
-      "quantity":12
+      "sale": 15,
+      "quantity": 12
     }
   ]
 }

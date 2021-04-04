@@ -21,8 +21,17 @@ app.set('views','./views');
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true }))
 
+
+
+
+// RestFull api with products
 app.get('/',(req,res)=>{
     const products=db.get('products').value()
+    res.json(products);
+})
+
+app.get('/products',(req,res)=>{
+    let products=db.get('products').value()
     res.json(products);
 })
 
@@ -86,6 +95,188 @@ app.post('/login',(req,res)=>{
     
 })
 
+
+// RestFull api with carts
+// let getProductsInCart = (cart, products) => {
+//     // let cart = data.carts.filter((cart) => {
+//     //   return cart.id === idUser;
+//     // })
+//     let arrProductsInCart = cart.products.map((item) => {
+//       return item.idProduct;
+//     });
+//     let arrProducts=products.filter((product)=>{
+//       return arrProductsInCart.includes(product.id);
+//     });
+//     let fakeCarts=arrProducts.map((product,index)=>{
+//       let quantityOrder=cart[0].products[index].quantity;
+//       return temp={...product,quantityOrder};
+//     });
+//     return fakeCarts;
+// }
+
+app.get('/carts/:id',(req,res)=>{
+    let id=parseInt(req.params.id);
+    let cart=db.get('carts').find({id:id}).value();
+    if(cart){
+        let products=db.get('products').value();
+        let arrProductsInCart = cart.products.map((item) => {
+            return item.idProduct;
+        });
+        let arrProducts=products.filter((product)=>{
+            return arrProductsInCart.includes(product.id);
+        });
+        let result=arrProducts.map((product,index)=>{
+            let quantityOrder=cart.products[index].quantityOrder;
+            return temp={...product,quantityOrder};
+        });
+        res.json(result);
+    }else{
+        res.json([]);
+    } 
+});
+// app.post('/carts/:id',(req,res)=>{
+//     let id=parseInt(req.params.id);
+//     let cart=db.get('carts').find({id:id}).value();
+//     res.json(carts);
+// })
+app.post('/carts/:id',(req,res)=>{
+    let id=parseInt(req.params.id);
+    let idProduct=parseInt(req.body.idProduct);
+    let cart=db.get('carts').find({id:id}).value();
+    let indexZ=null;
+    let productT=cart.products.filter((product,index)=>{
+        if(product.idProduct===idProduct){
+            indexZ=index;
+            return product.idProduct;
+        }
+    });
+    if(indexZ===null){
+        let cartFake={
+            idProduct,
+            quantityOrder:parseInt(req.body.quantityOrder)
+        }
+        cart.products.push(cartFake);
+    }else{
+        let quantityOrder=productT[0].quantityOrder+parseInt(req.body.quantityOrder);
+        let cartFake={
+            idProduct,
+            quantityOrder
+        }
+        cart.products[indexZ]=cartFake;
+    }
+    let carts=db.get('carts')
+        .find({ id: id })
+        .assign(cart)
+        .write()
+    res.json(carts);
+})
+
+
+app.delete('/carts/:id',(req,res)=>{
+    let id=parseInt(req.params.id);
+    let idProduct=parseInt(req.body.idProduct);
+    let cart=db.get('carts').find({id:id}).value();
+    let indexZ=null;
+    cart.products.filter((product,index)=>{
+        if(product.idProduct===idProduct){
+            indexZ=index;
+            return product.idProduct;
+        }
+    });
+    cart.products.splice(indexZ,1);
+    let carts=db.get('carts')
+        .find({ id: id })
+        .assign(cart)
+        .write()
+    res.json(carts);
+})
+
+
+
+// RestFull api with sold
+
+app.get('/sold/:id',(req,res)=>{
+    let id=parseInt(req.params.id);
+    let sold=db.get('sold').find({id:id}).value();
+    if(sold){
+        let products=db.get('products').value();
+        let arrProductsSold = sold.products.map((item) => {
+            return item.idProduct;
+        });
+        let arrProducts=products.filter((product)=>{
+            return arrProductsSold.includes(product.id);
+        });
+        let result=arrProducts.map((product,index)=>{
+            let quantityOrder=sold.products[index].quantityOrder;
+            return temp={...product,quantityOrder};
+        });
+        res.json(result);
+    }else{
+        res.json([]);
+    } 
+});
+
+
+// app.post('/sold/:id',(req,res)=>{
+//     let id=parseInt(req.params.id);
+//     db.get('sold').find({id:id}).push(req.body).write();
+//     let sold=db.get('sold')
+//         .find({ id: id })
+//         .write()
+//     res.json(sold);
+// })
+
+app.post('/sold/:id',(req,res)=>{
+    let id=parseInt(req.params.id);
+    let idProduct=parseInt(req.body.idProduct);
+    let cart=db.get('sold').find({id:id}).value();
+    let indexZ=null;
+    let productT=cart.products.filter((product,index)=>{
+        if(product.idProduct===idProduct){
+            indexZ=index;
+            return product.idProduct;
+        }
+    });
+    if(indexZ===null){
+        let cartFake={
+            idProduct,
+            quantityOrder:parseInt(req.body.quantityOrder)
+        }
+        cart.products.push(cartFake);
+    }else{
+        let quantityOrder=productT[0].quantityOrder+parseInt(req.body.quantityOrder);
+        let cartFake={
+            idProduct,
+            quantityOrder
+        }
+        cart.products[indexZ]=cartFake;
+    }
+    let carts=db.get('sold')
+        .find({ id: id })
+        .assign(cart)
+        .write()
+    res.json(carts);
+})
+
+
+app.delete('/sold/:id',(req,res)=>{
+    let id=parseInt(req.params.id);
+    let idProduct=parseInt(req.body.idProduct);
+    let cart=db.get('sold').find({id:id}).value();
+    let indexZ=null;
+    cart.products.filter((product,index)=>{
+        if(product.idProduct===idProduct){
+            indexZ=index;
+            return product.idProduct;
+        }
+    });
+    cart.products.splice(indexZ,1);
+    let carts=db.get('sold')
+        .find({ id: id })
+        .assign(cart)
+        .write()
+    res.json(carts);
+})
 
 
 // app.get('/', (req, res)=>{
