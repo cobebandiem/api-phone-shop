@@ -67,9 +67,9 @@
       "color": "black",
       "price": 123456789,
       "images": [
-        "apple-iphone-12-mini.png",
-        "apple-iphone-12-mini-2.png",
-        "apple-iphone-12-mini-3.png"
+        "2020/10/09/Note%2020%20-%20Green%20(2).png",
+        "2020/10/09/Note%2020%20-%20Green%20(1).png",
+        "2020/10/09/Note%2020%20-%20Gray%20(1).png"
       ],
       "sale": 15,
       "quantity": 25,
@@ -95,9 +95,11 @@
       "color": "black",
       "price": 123456789,
       "images": [
-        "apple-iphone-12-mini.png",
-        "apple-iphone-12-mini-2.png",
-        "apple-iphone-12-mini-3.png"
+        "2020/11/06/apple-iphone-12-mini-5.png",
+        "2020/11/06/apple-iphone-12-mini-4.png",
+        "2020/11/06/apple-iphone-12-mini-3.png",
+        "2020/11/06/apple-iphone-12-mini-2.png",
+        "2020/11/06/apple-iphone-12-mini.png"
       ],
       "sale": 15,
       "quantity": 21
@@ -121,9 +123,8 @@
       "color": "black",
       "price": 123456789,
       "images": [
-        "apple-iphone-12-mini.png",
-        "apple-iphone-12-mini-2.png",
-        "apple-iphone-12-mini-3.png"
+        "2020/10/12/8Plus-White.png",
+      "2020/10/12/8Plus-Gold.png"
       ],
       "sale": 15,
       "quantity": 12
@@ -147,9 +148,8 @@
       "color": "black",
       "price": 123456789,
       "images": [
-        "apple-iphone-12-mini.png",
-        "apple-iphone-12-mini-2.png",
-        "apple-iphone-12-mini-3.png"
+        "2020/10/12/8Plus-White.png",
+      "2020/10/12/8Plus-Gold.png"
       ],
       "sale": 15,
       "quantity": 12
@@ -173,9 +173,9 @@
       "color": "black",
       "price": 123456789,
       "images": [
-        "apple-iphone-12-mini.png",
-        "apple-iphone-12-mini-2.png",
-        "apple-iphone-12-mini-3.png"
+        "2020/10/09/Note%2020%20-%20Green%20(2).png",
+        "2020/10/09/Note%2020%20-%20Green%20(1).png",
+        "2020/10/09/Note%2020%20-%20Gray%20(1).png"
       ],
       "sale": 15,
       "quantity": 12
@@ -199,9 +199,9 @@
       "color": "black",
       "price": 123456789,
       "images": [
-        "apple-iphone-12-mini.png",
-        "apple-iphone-12-mini-2.png",
-        "apple-iphone-12-mini-3.png"
+        "2020/10/09/Note%2020%20-%20Green%20(2).png",
+        "2020/10/09/Note%2020%20-%20Green%20(1).png",
+        "2020/10/09/Note%2020%20-%20Gray%20(1).png"
       ],
       "sale": 15,
       "quantity": 12
