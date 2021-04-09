@@ -65,7 +65,7 @@
         "Hệ điều hành: iOS 14"
       ],
       "color": "black",
-      "price": 123456789,
+      "price": 13999000,
       "images": [
         "2020/10/09/Note%2020%20-%20Green%20(2).png",
         "2020/10/09/Note%2020%20-%20Green%20(1).png",
@@ -73,8 +73,7 @@
       ],
       "sale": 15,
       "quantity": 25,
-      "idProduct": "1",
-      "quantityOrder": 2
+      "idProduct": "1"
     },
     {
       "id": 2,
@@ -93,7 +92,7 @@
         "Hệ điều hành: iOS 14"
       ],
       "color": "black",
-      "price": 123456789,
+      "price": 23999000,
       "images": [
         "2020/11/06/apple-iphone-12-mini-5.png",
         "2020/11/06/apple-iphone-12-mini-4.png",
@@ -121,7 +120,7 @@
         "Hệ điều hành: iOS 14"
       ],
       "color": "black",
-      "price": 123456789,
+      "price": 13900000,
       "images": [
         "2020/10/12/8Plus-White.png",
       "2020/10/12/8Plus-Gold.png"
@@ -146,7 +145,7 @@
         "Hệ điều hành: iOS 14"
       ],
       "color": "black",
-      "price": 123456789,
+      "price": 17900000,
       "images": [
         "2020/10/12/8Plus-White.png",
       "2020/10/12/8Plus-Gold.png"
@@ -171,7 +170,7 @@
         "Hệ điều hành: iOS 14"
       ],
       "color": "black",
-      "price": 123456789,
+      "price": 14000000,
       "images": [
         "2020/10/09/Note%2020%20-%20Green%20(2).png",
         "2020/10/09/Note%2020%20-%20Green%20(1).png",
@@ -197,7 +196,7 @@
         "Hệ điều hành: iOS 14"
       ],
       "color": "black",
-      "price": 123456789,
+      "price": 11900000,
       "images": [
         "2020/10/09/Note%2020%20-%20Green%20(2).png",
         "2020/10/09/Note%2020%20-%20Green%20(1).png",
