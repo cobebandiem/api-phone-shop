@@ -6,7 +6,8 @@
       "password": "123456",
       "address": "97 man thien quan 9 hcm",
       "status": true,
-      "idCart": 1
+      "idCart": 1,
+      "image": "https://cobebandiem.github.io/cv/avatar.jpg"
     }
   ],
   "carts": [
@@ -123,7 +124,7 @@
       "price": 4500000,
       "images": [
         "2020/10/12/8Plus-White.png",
-      "2020/10/12/8Plus-Gold.png"
+        "2020/10/12/8Plus-Gold.png"
       ],
       "sale": 15,
       "quantity": 12
@@ -148,7 +149,7 @@
       "price": 1790000,
       "images": [
         "2020/10/12/8Plus-White.png",
-      "2020/10/12/8Plus-Gold.png"
+        "2020/10/12/8Plus-Gold.png"
       ],
       "sale": 15,
       "quantity": 12

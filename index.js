@@ -4,7 +4,6 @@
 // const server = app.listen(process.env.PORT || 3000, () => {
 //     console.log(`SERVER running`);
 // });'
-  
 const express = require('express');
 const app = express();
 const server = app.listen(process.env.PORT || 3000, () => {
@@ -15,6 +14,7 @@ const FileSync = require('lowdb/adapters/FileSync')
 const adapter = new FileSync('db.json')
 const db = low(adapter)
 const jwt = require('jsonwebtoken');
+const secretKey="huydu";
 
 app.set('view engine','pug');
 app.set('views','./views');
@@ -73,28 +73,68 @@ app.delete('/products/:id',(req,res)=>{
         .write()
     res.send(rs);
 })
+
+//login && user
 app.post('/login',(req,res)=>{
     const {username, password}=req.body;
+    console.log(req.headers);
     console.log(username);
     console.log(password);
     let user=db.get('users')
         .find({ username:username, password: password })
         .write()
     if(user){
-        var token = jwt.sign({ _id: user.id}, 'mk');
+        let token = jwt.sign({ _id: user.id}, secretKey);
+        console.log(token);
+        let decoded = jwt.verify(token, secretKey);
+        console.log(decoded._id);
+        res.cookie('access_token', token, {
+            maxAge: 365 * 24 * 60 * 60 * 100,
+            httpOnly: true,
+            //secure: true;
+        })
         res.json({
-            message:'success',
+            status:1,
             token:token
         });
     }else{
         res.status=404;
         res.json({
-            message:'faulty'
+            status:0
         });
-    }
-    
+    } 
 })
-
+app.get('/users',(req,res)=>{
+    let token = req.cookies.access_token;
+    let id = parseInt(jwt.verify(token, secretKey));
+    console.log(id);
+    let user=db.get('users').find({id:id}).value()
+    res.json(user);
+})
+app.post('/users',(req,res)=>{
+    let users=db.get('users').value();
+    let id=users[users.length-1].id + 1;
+    let user={
+        ...req.body,
+        id:parseInt(id)
+    }
+    db.get('users').push(user).write();
+    res.json({
+        status:1
+    });
+})
+app.put('/users/:id',(req,res)=>{
+    let id=parseInt(req.params.id);
+    let bodyFake={
+        ...req.body,
+        id:parseInt(req.body.id)
+    }
+    let user=db.get('users')
+        .find({ id: id })
+        .assign(bodyFake)
+        .write()
+    res.json(user);
+})
 
 // RestFull api with carts
 // let getProductsInCart = (cart, products) => {
