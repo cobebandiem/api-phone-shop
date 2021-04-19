@@ -15,13 +15,13 @@ const adapter = new FileSync('db.json')
 const db = low(adapter)
 const jwt = require('jsonwebtoken');
 const secretKey="huydu";
+const cookieParser = require('cookie-parser');
 
 app.set('view engine','pug');
 app.set('views','./views');
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true }))
-
-
+app.use(cookieParser())
 
 
 // RestFull api with products
@@ -86,12 +86,11 @@ app.post('/login',(req,res)=>{
     if(user){
         let token = jwt.sign({ _id: user.id}, secretKey);
         console.log(token);
-        let decoded = jwt.verify(token, secretKey);
-        console.log(decoded._id);
-        res.cookie('access_token', token, {
-            maxAge: 365 * 24 * 60 * 60 * 100,
-            httpOnly: true,
-            //secure: true;
+        res.cookie('access_token', token,{
+            domain: window.location.hostname,
+            expire: 1 / 24, // One hour
+            path: '/',
+            secure: false // If served over HTTPS
         })
         res.json({
             status:1,
@@ -105,11 +104,16 @@ app.post('/login',(req,res)=>{
     } 
 })
 app.get('/users',(req,res)=>{
-    let token = req.cookies.access_token;
-    let id = parseInt(jwt.verify(token, secretKey));
-    console.log(id);
-    let user=db.get('users').find({id:id}).value()
-    res.json(user);
+    console.log(req.cookies)
+    const { token } = req.cookies;
+    console.log(token)
+    if(token){
+        let id = parseInt(jwt.verify(token, secretKey));
+        console.log(id);
+        let user=db.get('users').find({id:id}).value()
+        res.json(user)
+    }
+    res.status=404;
 })
 app.post('/users',(req,res)=>{
     let users=db.get('users').value();
