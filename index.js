@@ -86,7 +86,9 @@ app.post('/login',(req,res)=>{
     if(user){
         let token = jwt.sign({ _id: user.id}, secretKey);
         console.log(token);
-        res.cookie('access_token', token)
+        res.cookie('access_token', token,{
+            secure: false // If served over HTTPS
+        })
         res.json({
             status:1,
             token:token
