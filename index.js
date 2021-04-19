@@ -111,7 +111,8 @@ app.post('/users',(req,res)=>{
     let id=users[users.length-1].id + 1;
     let user={
         ...req.body,
-        id:parseInt(id)
+        id:parseInt(id),
+        image: "https://cobebandiem.github.io/cv/avatar.jpg"
     }
     db.get('users').push(user).write();
 
