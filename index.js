@@ -83,26 +83,27 @@ app.post('/login',(req,res)=>{
     if(user){
         let token = jwt.sign({ _id: user.id}, secretKey);
         res.json({
-            status:1,
+            isStatus:1,
             token:token
         });
     }else{
         res.json({
-            status:0
+            isStatus:0
         });
     } 
 })
 app.get('/users',(req,res)=>{
     console.log(req.headers)
     const { token } = req.headers;
-    console.log(token)
     if(token){
-        let id = parseInt(jwt.verify(token, secretKey));
-        console.log(id);
-        let user=db.get('users').find({id:id}).value()
+        let {_id} = jwt.verify(token, secretKey);
+        let user=db.get('users').find({id:_id}).value()
         res.json(user)
+    }else{
+        res.json({
+            isStatus:0
+        })
     }
-    res.status=404;
 })
 
 app.post('/users',(req,res)=>{
@@ -113,21 +114,42 @@ app.post('/users',(req,res)=>{
         id:parseInt(id)
     }
     db.get('users').push(user).write();
+
+    let cart={
+        id:parseInt(id),
+        products:[]
+    }
+    db.get('carts').push(cart).write();
     res.json({
         status:1
     });
 })
-app.put('/users/:id',(req,res)=>{
-    let id=parseInt(req.params.id);
-    let bodyFake={
-        ...req.body,
-        id:parseInt(req.body.id)
+app.put('/users',(req,res)=>{
+    console.log(req.headers)
+    const { token } = req.headers;
+    if(token){
+        let {_id} = jwt.verify(token, secretKey);
+        let bodyFake={
+            ...req.body,
+            id:parseInt(_id)
+        }
+        db.get('users')
+            .find({ id: _id })
+            .assign(bodyFake)
+            .write();
+        res.json({
+            isStatus:1
+        })
+    }else{
+        res.json({
+            isStatus:0
+        })
     }
-    let user=db.get('users')
-        .find({ id: id })
-        .assign(bodyFake)
-        .write()
-    res.json(user);
+})
+
+app.get('/slides',(req,res)=>{
+    let slides=db.get('slides').value()
+    res.json(slides)
 })
 
 // RestFull api with carts

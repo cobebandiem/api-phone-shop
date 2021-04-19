@@ -6,8 +6,33 @@
       "password": "123456",
       "address": "97 man thien quan 9 hcm",
       "status": true,
-      "idCart": 1,
       "image": "https://cobebandiem.github.io/cv/avatar.jpg"
+    },
+    {
+      "username": "huydu",
+      "password": "123456",
+      "image": "https://cobebandiem.github.io/cv/avatar.jpg",
+      "status": "true",
+      "address": "97 man thien quan 9 hcm",
+      "id": 2
+    }
+  ],
+  "slides": [
+    {
+      "id": 1,
+      "image": "https://hoanghamobile.com/i/home/Uploads/2021/03/20/s21-83.png"
+    },
+    {
+      "id": 2,
+      "image": "https://hoanghamobile.com/i/home/Uploads/2021/03/19/nokia-54-web.png"
+    },
+    {
+      "id": 3,
+      "image": "https://hoanghamobile.com/i/home/Uploads/2021/03/19/a32a52a72-web.png"
+    },
+    {
+      "id": 4,
+      "image": "https://hoanghamobile.com/i/home/Uploads/2021/03/19/web-xiaomi-1.png"
     }
   ],
   "carts": [
