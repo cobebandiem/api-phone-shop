@@ -87,7 +87,8 @@ app.post('/login',(req,res)=>{
         let token = jwt.sign({ _id: user.id}, secretKey);
         console.log(token);
         res.cookie('access_token', token,{
-            secure: false // If served over HTTPS
+            secure: false, // If served over HTTPS
+            signed: true
         })
         res.json({
             status:1,
@@ -101,7 +102,7 @@ app.post('/login',(req,res)=>{
     } 
 })
 app.get('/users',(req,res)=>{
-    console.log(req.cookies)
+    console.log(req)
     const { token } = req.cookies;
     console.log(token)
     if(token){
@@ -112,6 +113,7 @@ app.get('/users',(req,res)=>{
     }
     res.status=404;
 })
+
 app.post('/users',(req,res)=>{
     let users=db.get('users').value();
     let id=users[users.length-1].id + 1;
