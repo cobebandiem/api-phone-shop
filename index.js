@@ -77,33 +77,24 @@ app.delete('/products/:id',(req,res)=>{
 //login && user
 app.post('/login',(req,res)=>{
     const {username, password}=req.body;
-    console.log(req.headers);
-    console.log(username);
-    console.log(password);
     let user=db.get('users')
         .find({ username:username, password: password })
         .write()
     if(user){
         let token = jwt.sign({ _id: user.id}, secretKey);
-        console.log(token);
-        res.cookie('access_token', token,{
-            secure: false, // If served over HTTPS
-            signed: true
-        })
         res.json({
             status:1,
             token:token
         });
     }else{
-        res.status=404;
         res.json({
             status:0
         });
     } 
 })
 app.get('/users',(req,res)=>{
-    console.log(req)
-    const { token } = req.cookies;
+    console.log(req.headers)
+    const { token } = req.headers;
     console.log(token)
     if(token){
         let id = parseInt(jwt.verify(token, secretKey));
