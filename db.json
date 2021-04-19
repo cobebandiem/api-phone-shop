@@ -2,19 +2,23 @@
   "users": [
     {
       "id": 1,
-      "username": "0944748742",
+      "username": "huydu123",
+      "phone":"0944748741",
       "password": "123456",
       "address": "97 man thien quan 9 hcm",
       "status": true,
-      "image": "https://cobebandiem.github.io/cv/avatar.jpg"
+      "image": "https://cobebandiem.github.io/cv/avatar.jpg",
+      "role":true
     },
     {
       "username": "huydu",
+      "phone":"0944748743",
       "password": "123456",
       "image": "https://cobebandiem.github.io/cv/avatar.jpg",
       "status": "true",
       "address": "97 man thien quan 9 hcm",
-      "id": 2
+      "id": 2,
+      "role":false
     }
   ],
   "slides": [

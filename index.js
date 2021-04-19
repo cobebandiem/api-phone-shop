@@ -112,10 +112,10 @@ app.post('/users',(req,res)=>{
     let user={
         ...req.body,
         id:parseInt(id),
-        image: "https://cobebandiem.github.io/cv/avatar.jpg"
+        image: "https://cobebandiem.github.io/cv/avatar.jpg",
+        status:true
     }
     db.get('users').push(user).write();
-
     let cart={
         id:parseInt(id),
         products:[]
