@@ -258,27 +258,33 @@ app.delete('/carts/:id',(req,res)=>{
 
 // RestFull api with sold
 
-app.get('/sold/:id',(req,res)=>{
-    let id=parseInt(req.params.id);
-    let sold=db.get('sold').find({id:id}).value();
-    if(sold){
-        let products=db.get('products').value();
-        let arrProductsSold = sold.products.map((item) => {
-            return item.idProduct;
-        });
-        let arrProducts=products.filter((product)=>{
-            return arrProductsSold.includes(product.id);
-        });
-        let result=arrProducts.map((product,index)=>{
-            let quantityOrder=sold.products[index].quantityOrder;
-            return temp={...product,quantityOrder};
-        });
-        res.json(result);
+app.get('/sold',(req,res)=>{
+    const { token } = req.headers;
+    if(token){
+        let {_id} = jwt.verify(token, secretKey);
+        let sold=db.get('sold').find({id:_id}).value();
+        if(sold){
+            let products=db.get('products').value();
+            let arrProductsSold = sold.products.map((item) => {
+                return item.idProduct;
+            });
+            let arrProducts=products.filter((product)=>{
+                return arrProductsSold.includes(product.id);
+            });
+            let result=arrProducts.map((product,index)=>{
+                let quantityOrder=sold.products[index].quantityOrder;
+                return temp={...product,quantityOrder};
+            });
+            res.json({result,isStatus:1});
+        }else{ 
+            res.json({isStatus:1});
+        } 
     }else{
-        res.json([]);
+        res.json({
+            isStatus:0
+        })
     } 
 });
-
 
 // app.post('/sold/:id',(req,res)=>{
 //     let id=parseInt(req.params.id);
@@ -289,38 +295,43 @@ app.get('/sold/:id',(req,res)=>{
 //     res.json(sold);
 // })
 
-app.post('/sold/:id',(req,res)=>{
-    let id=parseInt(req.params.id);
-    let idProduct=parseInt(req.body.idProduct);
-    let cart=db.get('sold').find({id:id}).value();
-    let indexZ=null;
-    let productT=cart.products.filter((product,index)=>{
-        if(product.idProduct===idProduct){
-            indexZ=index;
-            return product.idProduct;
+app.post('/sold',(req,res)=>{
+    const { token } = req.headers;
+    if(token){
+        let {_id} = jwt.verify(token, secretKey);
+        let cart=db.get('sold').find({id:_id}).value();
+        let indexZ=null;
+        let productT=cart.products.filter((product,index)=>{
+            if(product.idProduct===idProduct){
+                indexZ=index;
+                return product.idProduct;
+            }
+        });
+        if(indexZ===null){
+            let cartFake={
+                idProduct,
+                quantityOrder:parseInt(req.body.quantityOrder)
+            }
+            cart.products.push(cartFake);
+        }else{
+            let quantityOrder=productT[0].quantityOrder+parseInt(req.body.quantityOrder);
+            let cartFake={
+                idProduct,
+                quantityOrder
+            }
+            cart.products[indexZ]=cartFake;
         }
-    });
-    if(indexZ===null){
-        let cartFake={
-            idProduct,
-            quantityOrder:parseInt(req.body.quantityOrder)
-        }
-        cart.products.push(cartFake);
+        db.get('sold')
+            .find({ id: id })
+            .assign(cart)
+            .write()
+        res.json({isStatus:1}); 
     }else{
-        let quantityOrder=productT[0].quantityOrder+parseInt(req.body.quantityOrder);
-        let cartFake={
-            idProduct,
-            quantityOrder
-        }
-        cart.products[indexZ]=cartFake;
+        res.json({
+            isStatus:0
+        })
     }
-    let carts=db.get('sold')
-        .find({ id: id })
-        .assign(cart)
-        .write()
-    res.json(carts);
 })
-
 
 app.delete('/sold/:id',(req,res)=>{
     let id=parseInt(req.params.id);
