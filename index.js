@@ -76,7 +76,7 @@ app.delete('/products/:id',(req,res)=>{
 
 //login && user
 app.post('/login',(req,res)=>{
-    const {username, password}=req.body;
+    const {username, password}=req.headers;
     let user=db.get('users')
         .find({ username:username, password: password })
         .write()
@@ -97,8 +97,14 @@ app.get('/users',(req,res)=>{
     const { token } = req.headers;
     if(token){
         let {_id} = jwt.verify(token, secretKey);
-        let user=db.get('users').find({id:_id}).value()
+        let user=db.get('users').find({id:_id}).value();
+       if(user){
         res.json(user)
+       }else{
+        res.json({
+            isStatus:0
+        })
+       }
     }else{
         res.json({
             isStatus:0
@@ -122,7 +128,7 @@ app.post('/users',(req,res)=>{
     }
     db.get('carts').push(cart).write();
     res.json({
-        status:1
+        isStatus:1
     });
 })
 app.put('/users',(req,res)=>{
