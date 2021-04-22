@@ -46,15 +46,7 @@
       "id": 1,
       "products": [
         {
-          "idProduct": 1,
-          "quantityOrder": 3
-        },
-        {
-          "idProduct": 2,
-          "quantityOrder": 11
-        },
-        {
-          "idProduct": 3,
+          "idProduct": 5,
           "quantityOrder": 3
         }
       ]

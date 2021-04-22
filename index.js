@@ -210,81 +210,96 @@ app.get('/slides',(req,res)=>{
 //     return fakeCarts;
 // }
 
-app.get('/carts/:id',(req,res)=>{
-    let id=parseInt(req.params.id);
-    let cart=db.get('carts').find({id:id}).value();
-    if(cart){
-        let products=db.get('products').value();
-        let arrProductsInCart = cart.products.map((item) => {
-            return item.idProduct;
-        });
-        let arrProducts=products.filter((product)=>{
-            return arrProductsInCart.includes(product.id);
-        });
-        let result=arrProducts.map((product,index)=>{
-            let quantityOrder=cart.products[index].quantityOrder;
-            return temp={...product,quantityOrder};
-        });
-        res.json(result);
+app.get('/carts',(req,res)=>{
+    const { token} = req.headers;
+    if(token){
+        let {_id} = jwt.verify(token, secretKey);
+        let cart=db.get('carts').find({id:_id}).value();
+        if(cart){
+            let products=db.get('products').value();
+            let arrProductsInCart = cart.products.map((item) => {
+                return item.idProduct;
+            });
+            let arrProducts=products.filter((product)=>{
+                return arrProductsInCart.includes(product.id);
+            });
+            let result=arrProducts.map((product,index)=>{
+                let quantityOrder=cart.products[index].quantityOrder;
+                return temp={...product,quantityOrder};
+            });
+            res.json({isStatus:1,result});
+        }else{
+            res.json({isStatus:1,result:[]});
+        } 
     }else{
-        res.json([]);
-    } 
+        res.json({isStatus:0});
+    }
 });
 // app.post('/carts/:id',(req,res)=>{
 //     let id=parseInt(req.params.id);
 //     let cart=db.get('carts').find({id:id}).value();
 //     res.json(carts);
 // })
-app.post('/carts/:id',(req,res)=>{
-    let id=parseInt(req.params.id);
-    let idProduct=parseInt(req.body.idProduct);
-    let cart=db.get('carts').find({id:id}).value();
-    let indexZ=null;
-    let productT=cart.products.filter((product,index)=>{
-        if(product.idProduct===idProduct){
-            indexZ=index;
-            return product.idProduct;
+app.post('/carts',(req,res)=>{
+    let {token, id, sl} = req.headers;
+    let idProduct=parseInt(id);
+    console.log(idProduct)
+    if(token){
+        let {_id} = jwt.verify(token, secretKey);
+        let cart=db.get('carts').find({id:_id}).value();
+        let indexZ=null;
+        let productT=cart.products.filter((product,index)=>{
+            if(product.idProduct===idProduct){
+                indexZ=index;
+                return product.idProduct;
+            }
+        });
+        if(indexZ){
+            let cartFake={
+                idProduct,
+                quantityOrder:parseInt(sl)
+            }
+            cart.products.push(cartFake);
+        }else{
+            let quantityOrder=productT[0].quantityOrder+parseInt(sl);
+            let cartFake={
+                idProduct,
+                quantityOrder
+            }
+            cart.products[indexZ]=cartFake;
         }
-    });
-    if(indexZ===null){
-        let cartFake={
-            idProduct,
-            quantityOrder:parseInt(req.body.quantityOrder)
-        }
-        cart.products.push(cartFake);
+        db.get('carts')
+            .find({ id: _id })
+            .assign(cart)
+            .write()
+        res.json({isStatus:1});
     }else{
-        let quantityOrder=productT[0].quantityOrder+parseInt(req.body.quantityOrder);
-        let cartFake={
-            idProduct,
-            quantityOrder
-        }
-        cart.products[indexZ]=cartFake;
+        res.json({isStatus:0});
     }
-    let carts=db.get('carts')
-        .find({ id: id })
-        .assign(cart)
-        .write()
-    res.json(carts);
 })
 
 
-app.delete('/carts/:id',(req,res)=>{
-    let id=parseInt(req.params.id);
-    let idProduct=parseInt(req.body.idProduct);
-    let cart=db.get('carts').find({id:id}).value();
-    let indexZ=null;
-    cart.products.filter((product,index)=>{
-        if(product.idProduct===idProduct){
-            indexZ=index;
-            return product.idProduct;
-        }
-    });
-    cart.products.splice(indexZ,1);
-    let carts=db.get('carts')
-        .find({ id: id })
-        .assign(cart)
-        .write()
-    res.json(carts);
+app.delete('/carts',(req,res)=>{
+    const {token, idProduct} = req.headers;
+    if(token){
+        let {_id} = jwt.verify(token, secretKey);
+        let cart=db.get('carts').find({id:_id}).value();
+        let indexZ=null;
+        cart.products.filter((product,index)=>{
+            if(product.idProduct===idProduct){
+                indexZ=index;
+                return product.idProduct;
+            }
+        });
+        cart.products.splice(indexZ,1);
+        db.get('carts')
+            .find({ id: _id })
+            .assign(cart)
+            .write()
+        res.json({isStatus:1});
+    }else{
+        res.json({isStatus:0});
+    }    
 })
 
 
