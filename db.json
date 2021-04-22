@@ -48,6 +48,10 @@
         {
           "idProduct": 5,
           "quantityOrder": 3
+        },
+        {
+          "idProduct": 6,
+          "quantityOrder": 3
         }
       ]
     },
