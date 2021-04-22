@@ -263,7 +263,7 @@ app.get('/sold',(req,res)=>{
     if(token){
         let {_id} = jwt.verify(token, secretKey);
         let sold=db.get('sold').find({id:_id}).value();
-        if(sold){
+        if(sold.length>0){
             let products=db.get('products').value();
             let arrProductsSold = sold.products.map((item) => {
                 return item.idProduct;
