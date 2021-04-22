@@ -76,9 +76,9 @@ app.delete('/products/:id',(req,res)=>{
 
 //login && user
 app.post('/login',(req,res)=>{
-    const {username, password}=req.headers;
+    const {email, password}=req.headers;
     let user=db.get('users')
-        .find({ username:username, password: password })
+        .find({ email:email, password: password })
         .write()
     if(user){
         let token = jwt.sign({ _id: user.id}, secretKey);
@@ -151,10 +151,9 @@ app.post('/users',(req,res)=>{
 })
 app.put('/users',(req,res)=>{
     console.log(req.headers)
-    const { token } = req.headers;
+    const { token, email, name, phone, address } = req.headers;
     if(token){
         let {_id} = jwt.verify(token, secretKey);
-        const {email, name, phone, address}=req.headers;
         let userCheckEmail=db.get('users').find({email:email}).value();
         let userCheckPhone=db.get('users').find({phone:phone}).value();
         if(userCheckEmail){
