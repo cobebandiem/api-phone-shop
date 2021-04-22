@@ -79,7 +79,7 @@
   ],
   "products": [
     {
-      "id":"3",
+      "id":3,
       "name":"Điện thoại di động Samsung Galaxy Note 20 - Chính hãng",
       "brand":"samsung",
       "description":[
@@ -98,8 +98,8 @@
         "2020/10/09/Note%2020%20-%20Gray%20(1).png",
         ""
       ],
-      "sale":"15",
-      "quantity":"23",
+      "sale":15,
+      "quantity":23,
       "details":[
         "Công nghệ màn hình: Super AMOLED Plus",
         "Độ phân giải: Full HD+ (1080 x 2400 Pixels)",
@@ -110,7 +110,7 @@
       ]
     },
     {
-      "id":"4",
+      "id":4,
       "name":"Apple iPhone 12 - 256GB - Chính hãng VN/A",
       "brand":"iphone",
       "description":[
@@ -128,8 +128,8 @@
         "2020/11/06/apple-iphone-12-mini-2.png",
         "2020/11/06/apple-iphone-12-mini.png"
       ],
-      "sale":"12",
-      "quantity":"8",
+      "sale":12,
+      "quantity":8,
       "details":[
         "Công nghệ màn hình: OLED",
         "Độ phân giải: 1170 x 2532 Pixels",
@@ -141,7 +141,7 @@
       ]
     },
     {
-      "id":"5",
+      "id":5,
       "name":"iPhone 8 Plus - 128GB - Chính hãng (VN/A)",
       "brand":"iphone",
       "description":[
@@ -157,8 +157,8 @@
         "2020/10/12/8Plus-White.png",
         "2020/10/12/8Plus-Gold.png"
       ],
-      "sale":"10",
-      "quantity":"12",
+      "sale":10,
+      "quantity":12,
       "details":[
         "Công nghệ màn hình: LED-backlit IPS LCD",
         "Độ phân giải: Full HD (1080 x 1920 Pixels)",
@@ -169,7 +169,7 @@
       ]
     },
     {
-      "id":"6",
+      "id":6,
       "name":"Điện thoại di động Samsung Galaxy A52 - Chính hãng",
       "brand":"samsung",
       "description":[
@@ -185,8 +185,8 @@
         "2021/03/18/image-removebg-preview-10.png",
         "2021/03/18/image-removebg-preview-8.png"
       ],
-      "sale":"18",
-      "quantity":"3",
+      "sale":18,
+      "quantity":3,
       "details":[
         "Công nghệ màn hình: Super AMOLED",
         "Độ phân giải: Full HD (1080 x 2040 Pixels)",
@@ -198,7 +198,7 @@
       ]
     },
     {
-      "id":"7",
+      "id":7,
       "name":"Apple iPhone 12 Pro Max - 512GB - Chính hãng VN/A",
       "brand":"iphone",
       "description":[
@@ -215,8 +215,8 @@
         "2020/11/06/iphone-12-pro-max-2.png",
         "2020/11/06/iphone-12-pro-max.png"
       ],
-      "sale":"12",
-      "quantity":"12",
+      "sale":12,
+      "quantity":12,
       "details":[
         "Công nghệ màn hình: OLED",
         "Độ phân giải: 1284 x 2778 Pixels",
@@ -228,7 +228,7 @@
       ]
     },
     {
-      "id":"8",
+      "id":8,
       "name":"Điện thoại di động Vsmart Star 5 - 3GB/32GB - Chính hãng",
       "brand":"Vsmart",
       "description":[
@@ -244,8 +244,8 @@
         "2021/03/31/green.jpg",
         "2021/03/31/gray.jpg"
       ],
-      "sale":"5",
-      "quantity":"12",
+      "sale":5,
+      "quantity":12,
       "details":[
         "Công nghệ màn hình: IPS LCD",
         "Độ phân giải: HD+ (720 x 1600 Pixels)",
