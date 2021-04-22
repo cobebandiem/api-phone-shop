@@ -277,7 +277,7 @@ app.get('/sold',(req,res)=>{
             });
             res.json({result,isStatus:1});
         }else{ 
-            res.json({isStatus:1});
+            res.json({isStatus:1,result:[]});
         } 
     }else{
         res.json({
