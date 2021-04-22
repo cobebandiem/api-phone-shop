@@ -211,7 +211,7 @@ app.get('/slides',(req,res)=>{
 // }
 
 app.get('/carts',(req,res)=>{
-    const { token} = req.headers;
+    const {token} = req.headers;
     if(token){
         let {_id} = jwt.verify(token, secretKey);
         let cart=db.get('carts').find({id:_id}).value();
