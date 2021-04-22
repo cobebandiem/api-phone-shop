@@ -152,6 +152,7 @@ app.post('/users',(req,res)=>{
 app.put('/users',(req,res)=>{
     console.log(req.headers)
     const { token, email, name, phone, address } = req.headers;
+    console.log(token)
     if(token){
         let {_id} = jwt.verify(token, secretKey);
         let userCheckEmail=db.get('users').find({email:email}).value();
