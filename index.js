@@ -114,39 +114,72 @@ app.get('/users',(req,res)=>{
 
 app.post('/users',(req,res)=>{
     let users=db.get('users').value();
-    let id=users[users.length-1].id + 1;
-    let user={
-        ...req.body,
-        id:parseInt(id),
-        image: "https://cobebandiem.github.io/cv/avatar.jpg",
-        status:true
+    let id=parseInt(users[users.length-1].id) + 1;
+    const {email, name, password, phone, address}=req.headers;
+    let userCheckEmail=db.get('users').find({email:email}).value();
+    let userCheckPhone=db.get('users').find({phone:phone}).value();
+    if(userCheckEmail){
+        res.json({
+            isStatus:2
+        });
+    }else if(userCheckPhone){
+        res.json({
+            isStatus:3
+        });
+    }else{
+        let user={
+            id,
+            name,
+            password,
+            address,
+            phone,
+            email,
+            image: "https://cobebandiem.github.io/cv/avatar.jpg",
+            status:true,
+            role: false
+        }
+        db.get('users').push(user).write();
+        let cart={
+            id:parseInt(id),
+            products:[]
+        }
+        db.get('carts').push(cart).write();
+        res.json({
+            isStatus:1
+        });
     }
-    db.get('users').push(user).write();
-    let cart={
-        id:parseInt(id),
-        products:[]
-    }
-    db.get('carts').push(cart).write();
-    res.json({
-        isStatus:1
-    });
 })
 app.put('/users',(req,res)=>{
     console.log(req.headers)
     const { token } = req.headers;
     if(token){
         let {_id} = jwt.verify(token, secretKey);
-        let bodyFake={
-            ...req.body,
-            id:parseInt(_id)
+        const {email, name, phone, address}=req.headers;
+        let userCheckEmail=db.get('users').find({email:email}).value();
+        let userCheckPhone=db.get('users').find({phone:phone}).value();
+        if(userCheckEmail){
+            res.json({
+                isStatus:2
+            })
+        }else if(userCheckPhone){
+            res.json({
+                isStatus:3
+            })
+        }else{
+            let bodyFake={
+                name,
+                address,
+                phone,
+                email,
+            }
+            db.get('users')
+                .find({ id: _id })
+                .assign(bodyFake)
+                .write();
+            res.json({
+                isStatus:1
+            })
         }
-        db.get('users')
-            .find({ id: _id })
-            .assign(bodyFake)
-            .write();
-        res.json({
-            isStatus:1
-        })
     }else{
         res.json({
             isStatus:0
