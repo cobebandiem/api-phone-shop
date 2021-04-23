@@ -52,6 +52,10 @@
         {
           "idProduct": 6,
           "quantityOrder": 1
+        },
+        {
+          "idProduct": 7,
+          "quantityOrder": 1
         }
       ]
     },
@@ -64,10 +68,6 @@
     {
       "id": 1,
       "products": [
-        {
-          "idProduct": 3,
-          "quantityOrder": 3
-        },
         {
           "idProduct": 4,
           "quantityOrder": 1
