@@ -326,6 +326,8 @@ app.delete('/carts',(req,res)=>{
                 .assign(carts)
                 .write()
             res.json({isStatus:1,result:carts});
+        }else{
+            res.json({isStatus:0});
         }
     }else{
         res.json({isStatus:0});
