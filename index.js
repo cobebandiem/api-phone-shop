@@ -275,14 +275,14 @@ app.post('/carts',(req,res)=>{
     if(token){
         let {_id} = jwt.verify(token, secretKey);
         let cart=db.get('carts').find({id:_id}).value();
-        let indexZ=null;
+        let indexZ=-1;
         let productT=cart.products.filter((product,index)=>{
             if(product.idProduct===idProduct){
                 indexZ=index;
                 return product.idProduct;
             }
         });
-        if(!indexZ){
+        if(indexZ===-1){
             let cartFake={
                 idProduct,
                 quantityOrder:parseInt(sl)
