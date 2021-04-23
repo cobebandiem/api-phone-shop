@@ -308,8 +308,7 @@ app.post('/carts',(req,res)=>{
 
 
 app.delete('/carts',(req,res)=>{
-    const {token, id} = req.headers;
-    let idProduct=parseInt(id);
+    const {token, idProduct} = req.headers;
     if(token){
         let {_id} = jwt.verify(token, secretKey);
         let carts=db.get('carts').find({id:_id}).value();
