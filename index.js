@@ -259,11 +259,11 @@ app.put('/carts',(req,res)=>{
             quantityOrder
         }
         cart.products[indexZ]=cartFake;
-        db.get('carts')
+        let carts=db.get('carts')
             .find({ id: _id })
             .assign(cart)
             .write()
-        res.json({isStatus:1});
+        res.json({isStatus:1,carts});
     }else{
         res.json({isStatus:0});
     }
@@ -296,11 +296,11 @@ app.post('/carts',(req,res)=>{
             }
             cart.products[indexZ]=cartFake;
         }
-        db.get('carts')
+        let carts=db.get('carts')
             .find({ id: _id })
             .assign(cart)
             .write()
-        res.json({isStatus:1});
+        res.json({isStatus:1,carts});
     }else{
         res.json({isStatus:0});
     }
@@ -320,11 +320,11 @@ app.delete('/carts',(req,res)=>{
             }
         });
         cart.products.splice(indexZ,1);
-        db.get('carts')
+        let carts=db.get('carts')
             .find({ id: _id })
             .assign(cart)
             .write()
-        res.json({isStatus:1});
+        res.json({isStatus:1,carts});
     }else{
         res.json({isStatus:0});
     }    
