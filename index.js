@@ -319,7 +319,9 @@ app.delete('/carts',(req,res)=>{
                 return product.idProduct;
             }
         });
+        console.log(indexZ)
         if(indexZ!==-1){
+            console.log("sad")
             carts.products.splice(indexZ,1);
             db.get('carts')
                 .find({ id: _id })
