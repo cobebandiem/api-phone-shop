@@ -308,8 +308,9 @@ app.post('/carts',(req,res)=>{
 
 
 app.delete('/carts',(req,res)=>{
-    let {token, idProduct} = req.headers;
-    idProduct=parseInt(idProduct);
+    const {token, id} = req.headers;
+    idProduct=parseInt(id);
+    console.log(req.headers)
     console.log(idProduct)
     console.log(typeof idProduct)
     if(token){
