@@ -308,23 +308,26 @@ app.post('/carts',(req,res)=>{
 
 
 app.delete('/carts',(req,res)=>{
-    const {token, idProduct} = req.headers;
+    const {token, id} = req.headers;
+    let idProduct=parseInt(id);
     if(token){
         let {_id} = jwt.verify(token, secretKey);
-        let cart=db.get('carts').find({id:_id}).value();
-        let indexZ=null;
-        cart.products.filter((product,index)=>{
+        let carts=db.get('carts').find({id:_id}).value();
+        let indexZ=-1;
+        carts.products.filter((product,index)=>{
             if(product.idProduct===idProduct){
                 indexZ=index;
                 return product.idProduct;
             }
         });
-        let carts=cart.products.splice(indexZ,1);
-        let result=db.get('carts')
-            .find({ id: _id })
-            .assign(cart)
-            .write()
-        res.json({isStatus:1,result});
+        if(indexZ!==-1){
+            carts.products.splice(indexZ,1);
+            db.get('carts')
+                .find({ id: _id })
+                .assign(carts)
+                .write()
+            res.json({isStatus:1,result:carts});
+        }
     }else{
         res.json({isStatus:0});
     }    
