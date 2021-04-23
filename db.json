@@ -51,11 +51,7 @@
         },
         {
           "idProduct": 6,
-          "quantityOrder": 3
-        },
-        {
-          "idProduct": 4,
-          "quantityOrder": 2
+          "quantityOrder": 1
         }
       ]
     },

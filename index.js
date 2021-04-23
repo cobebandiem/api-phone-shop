@@ -240,6 +240,34 @@ app.get('/carts',(req,res)=>{
 //     let cart=db.get('carts').find({id:id}).value();
 //     res.json(carts);
 // })
+app.put('/carts',(req,res)=>{
+    let {token, id, sl} = req.headers;
+    let idProduct=parseInt(id);
+    if(token){
+        let {_id} = jwt.verify(token, secretKey);
+        let cart=db.get('carts').find({id:_id}).value();
+        let indexZ=null;
+        let productT=cart.products.filter((product,index)=>{
+            if(product.idProduct===idProduct){
+                indexZ=index;
+                return product.idProduct;
+            }
+        });
+        let quantityOrder=parseInt(sl);
+        let cartFake={
+            idProduct,
+            quantityOrder
+        }
+        cart.products[indexZ]=cartFake;
+        db.get('carts')
+            .find({ id: _id })
+            .assign(cart)
+            .write()
+        res.json({isStatus:1});
+    }else{
+        res.json({isStatus:0});
+    }
+})
 app.post('/carts',(req,res)=>{
     let {token, id, sl} = req.headers;
     let idProduct=parseInt(id);
