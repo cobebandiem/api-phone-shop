@@ -254,7 +254,7 @@ app.post('/carts',(req,res)=>{
                 return product.idProduct;
             }
         });
-        if(indexZ){
+        if(!indexZ){
             let cartFake={
                 idProduct,
                 quantityOrder:parseInt(sl)
