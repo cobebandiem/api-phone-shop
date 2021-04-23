@@ -241,7 +241,7 @@ app.get('/carts',(req,res)=>{
 //     res.json(carts);
 // })
 app.put('/carts',(req,res)=>{
-    let {token, id, sl} = req.headers;
+    let {token, id, quantityOrder} = req.headers;
     let idProduct=parseInt(id);
     if(token){
         let {_id} = jwt.verify(token, secretKey);
@@ -253,7 +253,7 @@ app.put('/carts',(req,res)=>{
                 return product.idProduct;
             }
         });
-        let quantityOrder=parseInt(sl);
+        let quantityOrder=parseInt(quantityOrder);
         let cartFake={
             idProduct,
             quantityOrder
@@ -269,7 +269,7 @@ app.put('/carts',(req,res)=>{
     }
 })
 app.post('/carts',(req,res)=>{
-    let {token, id, sl} = req.headers;
+    let {token, id, quantityOrder} = req.headers;
     let idProduct=parseInt(id);
     console.log(idProduct)
     if(token){
@@ -285,11 +285,11 @@ app.post('/carts',(req,res)=>{
         if(!indexZ){
             let cartFake={
                 idProduct,
-                quantityOrder:parseInt(sl)
+                quantityOrder:parseInt(quantityOrder)
             }
             cart.products.push(cartFake);
         }else{
-            let quantityOrder=productT[0].quantityOrder+parseInt(sl);
+            let quantityOrder=productT[0].quantityOrder+parseInt(quantityOrder);
             let cartFake={
                 idProduct,
                 quantityOrder
