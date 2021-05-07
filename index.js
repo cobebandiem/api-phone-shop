@@ -92,7 +92,7 @@ app.post('/login',(req,res)=>{
         });
     } 
 })
-app.get('/users',(req,res)=>{
+app.post('/users',(req,res)=>{
     console.log(req.headers)
     const { token } = req.headers;
     if(token){
@@ -112,7 +112,7 @@ app.get('/users',(req,res)=>{
     }
 })
 
-app.post('/users',(req,res)=>{
+app.post('/addUsers',(req,res)=>{
     let users=db.get('users').value();
     let id=parseInt(users[users.length-1].id) + 1;
     const {email, name, password, phone, address}=req.headers;
@@ -310,9 +310,6 @@ app.post('/carts',(req,res)=>{
 app.delete('/carts',(req,res)=>{
     const {token, id} = req.headers;
     idProduct=parseInt(id);
-    console.log(req.headers)
-    console.log(idProduct)
-    console.log(typeof idProduct)
     if(token){
         let {_id} = jwt.verify(token, secretKey);
         let carts=db.get('carts').find({id:_id}).value();
