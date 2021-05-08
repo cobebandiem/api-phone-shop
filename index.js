@@ -84,13 +84,32 @@ app.post('/login',(req,res)=>{
         let token = jwt.sign({ _id: user.id}, secretKey);
         res.json({
             isStatus:1,
-            token:token
+            token:user.id
         });
     }else{
         res.json({
             isStatus:0
         });
     } 
+})
+app.get('/users',(req,res)=>{
+    console.log(req.headers)
+    const { id } = req.headers;
+    if(id){
+        //let {_id} = jwt.verify(token, secretKey);
+        let user=db.get('users').find({id:id}).value();
+       if(user){
+        res.json(user)
+       }else{
+        res.json({
+            isStatus:0
+        })
+       }
+    }else{
+        res.json({
+            isStatus:0
+        })
+    }
 })
 app.post('/users',(req,res)=>{
     console.log(req.headers)
