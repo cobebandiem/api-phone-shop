@@ -94,7 +94,8 @@ app.post('/login',(req,res)=>{
 })
 app.get('/users',(req,res)=>{
     console.log(req.headers)
-    const { id } = req.headers;
+    let { id } = req.headers;
+    id=parseInt(id);
     if(id){
         //let {_id} = jwt.verify(token, secretKey);
         let user=db.get('users').find({id:id}).value();
