@@ -470,6 +470,17 @@ app.delete('/sold',(req,res)=>{
 })
 
 
+app.get('/brands',(req, res)=>{
+    let products=db.get('products').value();
+    let brands=products.map((product)=>{return product.brand});
+    brands=brands.filter((brand,index)=>{
+        return brands.indexOf(brand)===index;
+    })
+    res.json({
+        brands:brands
+    });
+})
+
 // app.get('/', (req, res)=>{
 
 // },(req, res) => {
