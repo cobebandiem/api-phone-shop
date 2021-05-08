@@ -2,11 +2,11 @@
   "users": [
     {
       "id": 1,
-      "email": "huydu99@gmail.com",
-      "name": "huydu99",
-      "phone": "12345",
+      "email": "huydu1111@gmail.com",
+      "name": "huyduso11",
+      "phone": "09447487438",
       "password": "123456",
-      "address": "99 huy du",
+      "address": "huy du ngu so 1",
       "status": true,
       "image": "https://cobebandiem.github.io/cv/avatar.jpg",
       "role": true
@@ -62,6 +62,10 @@
     {
       "id": 2,
       "products": []
+    },
+    {
+      "id": 3,
+      "products": []
     }
   ],
   "sold": [
@@ -70,7 +74,7 @@
       "products": [
         {
           "idProduct": 4,
-          "quantityOrder": 1
+          "quantityOrder": 3
         }
       ]
     }

@@ -81,10 +81,9 @@ app.post('/login',(req,res)=>{
         .find({ email:email, password: password })
         .write()
     if(user){
-        let token = jwt.sign({ _id: user.id}, secretKey);
         res.json({
             isStatus:1,
-            token:user.id
+            id:user.id
         });
     }else{
         res.json({
@@ -92,12 +91,12 @@ app.post('/login',(req,res)=>{
         });
     } 
 })
+
 app.get('/users',(req,res)=>{
     console.log(req.headers)
     let { id } = req.headers;
     id=parseInt(id);
     if(id){
-        //let {_id} = jwt.verify(token, secretKey);
         let user=db.get('users').find({id:id}).value();
        if(user){
         res.json(user)
@@ -112,27 +111,8 @@ app.get('/users',(req,res)=>{
         })
     }
 })
-app.post('/users',(req,res)=>{
-    console.log(req.headers)
-    const { token } = req.headers;
-    if(token){
-        let {_id} = jwt.verify(token, secretKey);
-        let user=db.get('users').find({id:_id}).value();
-       if(user){
-        res.json(user)
-       }else{
-        res.json({
-            isStatus:0
-        })
-       }
-    }else{
-        res.json({
-            isStatus:0
-        })
-    }
-})
 
-app.post('/addUsers',(req,res)=>{
+app.post('/users',(req,res)=>{
     let users=db.get('users').value();
     let id=parseInt(users[users.length-1].id) + 1;
     const {email, name, password, phone, address}=req.headers;
@@ -171,17 +151,18 @@ app.post('/addUsers',(req,res)=>{
 })
 app.put('/users',(req,res)=>{
     console.log(req.headers)
-    const { token, email, name, phone, address } = req.headers;
-    console.log(token)
-    if(token){
-        let {_id} = jwt.verify(token, secretKey);
-        let userCheckEmail=db.get('users').find({email:email}).value();
-        let userCheckPhone=db.get('users').find({phone:phone}).value();
-        if(userCheckEmail){
+    let { id, email, name, phone, address } = req.headers;
+    id=parseInt(id);
+    if(id){
+        let userCheckEmail=db.get('users').find({email:email}).value()?db.get('users').find({email:email}).value():{email:null};
+        let userCheckPhone=db.get('users').find({phone:phone}).value()?db.get('users').find({phone:phone}).value():{phone:null};
+        let user=db.get('users').find({id:id}).value();
+        console.log(userCheckEmail)
+        if(userCheckEmail.email!==user.email && userCheckEmail.email){
             res.json({
                 isStatus:2
             })
-        }else if(userCheckPhone){
+        }else if(userCheckPhone.phone!==user.phone && userCheckPhone.phone){
             res.json({
                 isStatus:3
             })
@@ -193,11 +174,40 @@ app.put('/users',(req,res)=>{
                 email,
             }
             db.get('users')
-                .find({ id: _id })
+                .find({ id: id })
                 .assign(bodyFake)
                 .write();
             res.json({
                 isStatus:1
+            })
+        }
+    }else{
+        res.json({
+            isStatus:0
+        })
+    }
+})
+app.put('/password',(req,res)=>{
+    console.log(req.headers)
+    let { id, new_password, old_password} = req.headers;
+    id=parseInt(id);
+    if(id){
+        let user=db.get('users').find({id:id}).value();
+        if(user.password===old_password){
+            let bodyFake={
+                ...user,
+                password:new_password
+            }
+            db.get('users')
+                .find({ id: id })
+                .assign(bodyFake)
+                .write();
+            res.json({
+                isStatus:1
+            })
+        }else{
+            res.json({
+                isStatus:2
             })
         }
     }else{
@@ -231,10 +241,10 @@ app.get('/slides',(req,res)=>{
 // }
 
 app.get('/carts',(req,res)=>{
-    const {token} = req.headers;
-    if(token){
-        let {_id} = jwt.verify(token, secretKey);
-        let cart=db.get('carts').find({id:_id}).value();
+    let {id} = req.headers;
+    id=parseInt(id);
+    if(id){
+        let cart=db.get('carts').find({id:id}).value();
         if(cart){
             let products=db.get('products').value();
             let arrProductsInCart = cart.products.map((item) => {
@@ -261,11 +271,11 @@ app.get('/carts',(req,res)=>{
 //     res.json(carts);
 // })
 app.put('/carts',(req,res)=>{
-    let {token, id, sl} = req.headers;
+    let {id_user, id, sl} = req.headers;
+    id_user=parseInt(id_user);
     let idProduct=parseInt(id);
-    if(token){
-        let {_id} = jwt.verify(token, secretKey);
-        let cart=db.get('carts').find({id:_id}).value();
+    if(id_user){
+        let cart=db.get('carts').find({id:id_user}).value();
         let indexZ=null;
         let productT=cart.products.filter((product,index)=>{
             if(product.idProduct===idProduct){
@@ -280,7 +290,7 @@ app.put('/carts',(req,res)=>{
         }
         cart.products[indexZ]=cartFake;
         let result=db.get('carts')
-            .find({ id: _id })
+            .find({ id: id_user })
             .assign(cart)
             .write()
         res.json({isStatus:1,result});
@@ -289,12 +299,12 @@ app.put('/carts',(req,res)=>{
     }
 })
 app.post('/carts',(req,res)=>{
-    let {token, id, sl} = req.headers;
+    let {id_user, id, sl} = req.headers;
+    id_user=parseInt(id_user);
     let idProduct=parseInt(id);
     console.log(idProduct)
-    if(token){
-        let {_id} = jwt.verify(token, secretKey);
-        let cart=db.get('carts').find({id:_id}).value();
+    if(id_user){
+        let cart=db.get('carts').find({id:id_user}).value();
         let indexZ=-1;
         let productT=cart.products.filter((product,index)=>{
             if(product.idProduct===idProduct){
@@ -317,7 +327,7 @@ app.post('/carts',(req,res)=>{
             cart.products[indexZ]=cartFake;
         }
         let result=db.get('carts')
-            .find({ id: _id })
+            .find({ id: id_user })
             .assign(cart)
             .write()
         res.json({isStatus:1,result});
@@ -328,11 +338,11 @@ app.post('/carts',(req,res)=>{
 
 
 app.delete('/carts',(req,res)=>{
-    const {token, id} = req.headers;
+    let {id_user, id} = req.headers;
+    id_user=parseInt(id_user);
     idProduct=parseInt(id);
-    if(token){
-        let {_id} = jwt.verify(token, secretKey);
-        let carts=db.get('carts').find({id:_id}).value();
+    if(id_user){
+        let carts=db.get('carts').find({id:id_user}).value();
         let indexZ=-1;
         carts.products.filter((product,index)=>{
             if(product.idProduct===idProduct){
@@ -345,7 +355,7 @@ app.delete('/carts',(req,res)=>{
             console.log("sad")
             carts.products.splice(indexZ,1);
             db.get('carts')
-                .find({ id: _id })
+                .find({ id: id_user })
                 .assign(carts)
                 .write()
             res.json({isStatus:1,result:carts});
@@ -362,10 +372,10 @@ app.delete('/carts',(req,res)=>{
 // RestFull api with sold
 
 app.get('/sold',(req,res)=>{
-    const { token } = req.headers;
-    if(token){
-        let {_id} = jwt.verify(token, secretKey);
-        let sold=db.get('sold').find({id:_id}).value();
+    let {id_user} = req.headers;
+    id_user=parseInt(id_user);
+    if(id_user){
+        let sold=db.get('sold').find({id:id_user}).value();
         if(sold){
             let products=db.get('products').value();
             let arrProductsSold = sold.products.map((item) => {
@@ -399,10 +409,11 @@ app.get('/sold',(req,res)=>{
 // })
 
 app.post('/sold',(req,res)=>{
-    const { token } = req.headers;
-    if(token){
-        let {_id} = jwt.verify(token, secretKey);
-        let cart=db.get('sold').find({id:_id}).value();
+    let {id_user, id, sl} = req.headers;
+    id_user=parseInt(id_user);
+    let idProduct=parseInt(id);
+    if(id_user){
+        let cart=db.get('sold').find({id:id_user}).value();
         let indexZ=null;
         let productT=cart.products.filter((product,index)=>{
             if(product.idProduct===idProduct){
@@ -413,11 +424,11 @@ app.post('/sold',(req,res)=>{
         if(indexZ===null){
             let cartFake={
                 idProduct,
-                quantityOrder:parseInt(req.body.quantityOrder)
+                quantityOrder:parseInt(sl)
             }
             cart.products.push(cartFake);
         }else{
-            let quantityOrder=productT[0].quantityOrder+parseInt(req.body.quantityOrder);
+            let quantityOrder=productT[0].quantityOrder+parseInt(sl);
             let cartFake={
                 idProduct,
                 quantityOrder
@@ -436,23 +447,26 @@ app.post('/sold',(req,res)=>{
     }
 })
 
-app.delete('/sold/:id',(req,res)=>{
-    let id=parseInt(req.params.id);
-    let idProduct=parseInt(req.body.idProduct);
-    let cart=db.get('sold').find({id:id}).value();
-    let indexZ=null;
-    cart.products.filter((product,index)=>{
-        if(product.idProduct===idProduct){
-            indexZ=index;
-            return product.idProduct;
-        }
-    });
-    cart.products.splice(indexZ,1);
-    let carts=db.get('sold')
-        .find({ id: id })
-        .assign(cart)
-        .write()
-    res.json(carts);
+app.delete('/sold',(req,res)=>{
+    let {id_user, id} = req.headers;
+    id_user=parseInt(id_user);
+    if(id_user){
+        let idProduct=parseInt(id);
+        let cart=db.get('sold').find({id:id_user}).value();
+        let indexZ=null;
+        cart.products.filter((product,index)=>{
+            if(product.idProduct===idProduct){
+                indexZ=index;
+                return product.idProduct;
+            }
+        });
+        cart.products.splice(indexZ,1);
+        let carts=db.get('sold')
+            .find({ id: id_user })
+            .assign(cart)
+            .write()
+        res.json(carts);
+    }
 })
 
 
