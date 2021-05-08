@@ -102,7 +102,7 @@ app.get('/users',(req,res)=>{
         res.json(user)
        }else{
         res.json({
-            isStatus:0
+            isStatus:2
         })
        }
     }else{
