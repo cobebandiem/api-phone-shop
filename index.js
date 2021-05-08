@@ -257,9 +257,9 @@ app.get('/carts',(req,res)=>{
                 let quantityOrder=cart.products[index].quantityOrder;
                 return temp={...product,quantityOrder};
             });
-            res.json({result});
+            res.json(result);
         }else{
-            res.json({result:[]});
+            res.json([]);
         } 
     }else{
         res.json({isStatus:0});
