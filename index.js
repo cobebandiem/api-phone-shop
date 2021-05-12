@@ -91,6 +91,22 @@ app.post('/login',(req,res)=>{
         });
     } 
 })
+app.post('/login1',(req,res)=>{
+    const {email, password}=req.headers;
+    let user=db.get('users')
+        .find({ email:email, password: password })
+        .write()
+    if(user){
+        res.json({
+            isStatus:1,
+            user
+        });
+    }else{
+        res.json({
+            isStatus:0
+        });
+    } 
+})
 
 app.get('/users',(req,res)=>{
     console.log(req.headers)
