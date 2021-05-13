@@ -61,7 +61,16 @@
     },
     {
       "id": 2,
-      "products": []
+      "products": [
+        {
+          "idProduct": 6,
+          "quantityOrder": 3
+        },
+        {
+          "idProduct": 7,
+          "quantityOrder": 1
+        }
+      ]
     },
     {
       "id": 3,
