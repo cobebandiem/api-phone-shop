@@ -47,7 +47,7 @@
       "products": [
         {
           "idProduct": 3,
-          "quantityOrder": 1
+          "quantityOrder": 2
         },
         {
           "idProduct": 6,
@@ -55,7 +55,7 @@
         },
         {
           "idProduct": 7,
-          "quantityOrder": 1
+          "quantityOrder": 2
         }
       ]
     },
