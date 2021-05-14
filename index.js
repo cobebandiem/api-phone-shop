@@ -302,7 +302,8 @@ app.put('/carts',(req,res)=>{
         let quantityOrder=parseInt(sl);
         let cartFake={
             idProduct,
-            quantityOrder
+            quantityOrder,
+            checked:true
         }
         cart.products[indexZ]=cartFake;
         let result=db.get('carts')
@@ -314,6 +315,37 @@ app.put('/carts',(req,res)=>{
         res.json({isStatus:0});
     }
 })
+app.post('/changeChecked',(req,res)=>{
+    let {id_user, id, sl} = req.headers;
+    id_user=parseInt(id_user);
+    let idProduct=parseInt(id);
+    if(id_user){
+        let cart=db.get('carts').find({id:id_user}).value();
+        let indexZ=-1;
+        let productT=cart.products.filter((product,index)=>{
+            if(product.idProduct===idProduct){
+                indexZ=index;
+                return product.idProduct;
+            }
+        });
+        let quantityOrder=productT[0].quantityOrder;
+        let checked=!productT[0].checked;
+        let cartFake={
+            idProduct,
+            quantityOrder,
+            checked
+        }
+        cart.products[indexZ]=cartFake;
+        let result=db.get('carts')
+            .find({ id: id_user })
+            .assign(cart)
+            .write()
+        res.json({isStatus:1,result});
+    }else{
+        res.json({isStatus:0});
+    }
+})
+
 app.post('/carts',(req,res)=>{
     let {id_user, id, sl} = req.headers;
     id_user=parseInt(id_user);
@@ -331,14 +363,17 @@ app.post('/carts',(req,res)=>{
         if(indexZ===-1){
             let cartFake={
                 idProduct,
-                quantityOrder:parseInt(sl)
+                quantityOrder:parseInt(sl),
+                checked:true
             }
             cart.products.push(cartFake);
         }else{
             let quantityOrder=productT[0].quantityOrder+parseInt(sl);
+            let checked=!productT[0].checked;
             let cartFake={
                 idProduct,
-                quantityOrder
+                quantityOrder,
+                checked
             }
             cart.products[indexZ]=cartFake;
         }

@@ -47,15 +47,18 @@
       "products": [
         {
           "idProduct": 3,
-          "quantityOrder": 2
+          "quantityOrder": 2,
+          "checked":true
         },
         {
           "idProduct": 6,
-          "quantityOrder": 3
+          "quantityOrder": 3,
+          "checked":true
         },
         {
           "idProduct": 7,
-          "quantityOrder": 2
+          "quantityOrder": 2,
+          "checked":true
         }
       ]
     },
@@ -64,15 +67,18 @@
       "products": [
         {
           "idProduct": 3,
-          "quantityOrder": 1
+          "quantityOrder": 1,
+          "checked":true
         },
         {
           "idProduct": 6,
-          "quantityOrder": 3
+          "quantityOrder": 3,
+          "checked":true
         },
         {
           "idProduct": 7,
-          "quantityOrder": 1
+          "quantityOrder": 1,
+          "checked":true
         }
       ]
     },
