@@ -370,11 +370,10 @@ app.post('/carts', (req, res) => {
             cart.products.push(cartFake);
         } else {
             let quantityOrder = productT[0].quantityOrder + parseInt(sl);
-            let checked = !productT[0].checked;
             let cartFake = {
                 idProduct,
                 quantityOrder,
-                checked
+                checked:true
             }
             cart.products[indexZ] = cartFake;
         }
@@ -461,42 +460,66 @@ app.get('/sold', (req, res) => {
 // })
 
 app.post('/sold', (req, res) => {
-    let { id_user, id, sl } = req.headers;
-    id_user = parseInt(id_user);
-    let idProduct = parseInt(id);
-    if (id_user) {
-        let cart = db.get('sold').find({ id: id_user }).value();
-        let indexZ = null;
-        let productT = cart.products.filter((product, index) => {
-            if (product.idProduct === idProduct) {
-                indexZ = index;
-                return product.idProduct;
+    let { id } = req.headers;
+    id = parseInt(id);
+    let carts = db.get('carts').find({ id: id }).value();
+    let sold = db.get('sold').find({ id: id }).value();
+    let products = db.get('products').value();
+    let cartsChecked = carts.products.filter((cart) => cart.checked === true);
+    //edit quantity on products when customer order
+    products.map((product, index)=>{
+        cartsChecked.map((cart)=>{
+            if(cart.idProduct===product.id){
+                products[index].quantity-=cart.quantityOrder;
+            }
+        })
+    })
+    //add from carts to sold
+    cartsChecked.map((cart) => {
+        let isCheck = false;
+        sold.products.map((item, index) => {
+            isCheck = item.idProduct === cart.idProduct ? true : false;
+            if (isCheck) {
+                sold.products[index].quantityOrder += cart.quantityOrder;
             }
         });
-        if (indexZ === null) {
-            let cartFake = {
-                idProduct,
-                quantityOrder: parseInt(sl)
-            }
-            cart.products.push(cartFake);
-        } else {
-            let quantityOrder = productT[0].quantityOrder + parseInt(sl);
-            let cartFake = {
-                idProduct,
-                quantityOrder
-            }
-            cart.products[indexZ] = cartFake;
-        }
-        db.get('sold')
-            .find({ id: id })
-            .assign(cart)
-            .write()
-        res.json({ isStatus: 1 });
-    } else {
-        res.json({
-            isStatus: 0
-        })
+        if (!isCheck) {
+            sold.products.push({
+                idProduct: cart.idProduct,
+                quantityOrder: cart.quantityOrder
+            })
+        };
+
+
+    });
+    //delete from carts
+    let cartsNotChecked = carts.products.filter((cart) => cart.checked === false);
+    let cartPerson={
+        id,
+        products:cartsNotChecked
     }
+    db.get('carts')
+        .find({ id })
+        .assign(cartPerson)
+        .write()
+    db.get('sold')
+        .find({ id })
+        .assign(sold)
+        .write()
+    db.get('products')
+        .assign(products)
+        .write()
+    let arrProductsSold = sold.products.map((item) => {
+        return item.idProduct;
+    });
+    let arrProducts = products.filter((product) => {
+        return arrProductsSold.includes(product.id);
+    });
+    let result = arrProducts.map((product, index) => {
+        let quantityOrder = sold.products[index].quantityOrder;
+        return temp = { ...product, quantityOrder };
+    });
+    res.json({ result, isStatus: 1 });
 })
 
 app.delete('/sold', (req, res) => {

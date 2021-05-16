@@ -48,16 +48,16 @@
         {
           "idProduct": 3,
           "quantityOrder": 2,
-          "checked":true
+          "checked":false
         },
         {
           "idProduct": 6,
           "quantityOrder": 3,
-          "checked":true
+          "checked":false
         },
         {
           "idProduct": 7,
-          "quantityOrder": 2,
+          "quantityOrder": 1,
           "checked":true
         }
       ]
@@ -96,6 +96,10 @@
           "quantityOrder": 3
         }
       ]
+    },
+    {
+      "id": 2,
+      "products": []
     }
   ],
   "products": [
