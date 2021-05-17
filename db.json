@@ -67,11 +67,13 @@
       "products": [
         {
           "idProduct": 3,
-          "quantityOrder": 1
+          "quantityOrder": 1,
+          "checked":true
         },
         {
           "idProduct": 6,
-          "quantityOrder": 3
+          "quantityOrder": 3,
+          "checked":false
         }
       ]
     }
