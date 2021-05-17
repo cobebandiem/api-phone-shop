@@ -436,7 +436,12 @@ app.get('/sold', (req, res) => {
                 return arrProductsSold.includes(product.id);
             });
             let result = arrProducts.map((product, index) => {
-                let quantityOrder = sold.products[index].quantityOrder;
+                let quantityOrder = 0;
+                sold.products.map((item)=>{
+                    if(item.idProduct===product.id){
+                        quantityOrder=item.quantityOrder;
+                    }
+                })
                 return temp = { ...product, quantityOrder };
             });
             res.json({ result, isStatus: 1 });
@@ -516,7 +521,12 @@ app.post('/sold', (req, res) => {
         return arrProductsSold.includes(product.id);
     });
     let result = arrProducts.map((product, index) => {
-        let quantityOrder = sold.products[index].quantityOrder;
+        let quantityOrder =0;
+        sold.products.map((item)=>{
+            if(item.idProduct===product.id){
+                quantityOrder=item.quantityOrder;
+            }
+        })
         return temp = { ...product, quantityOrder };
     });
     res.json({ result, isStatus: 1 });

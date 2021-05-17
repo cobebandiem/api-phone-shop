@@ -48,17 +48,17 @@
         {
           "idProduct": 3,
           "quantityOrder": 2,
-          "checked":false
+          "checked": false
         },
         {
           "idProduct": 6,
           "quantityOrder": 3,
-          "checked":false
+          "checked": false
         },
         {
           "idProduct": 7,
           "quantityOrder": 1,
-          "checked":true
+          "checked": true
         }
       ]
     },
@@ -67,24 +67,13 @@
       "products": [
         {
           "idProduct": 3,
-          "quantityOrder": 1,
-          "checked":true
+          "quantityOrder": 1
         },
         {
           "idProduct": 6,
-          "quantityOrder": 3,
-          "checked":true
-        },
-        {
-          "idProduct": 7,
-          "quantityOrder": 1,
-          "checked":true
+          "quantityOrder": 3
         }
       ]
-    },
-    {
-      "id": 3,
-      "products": []
     }
   ],
   "sold": [
@@ -99,7 +88,12 @@
     },
     {
       "id": 2,
-      "products": []
+      "products": [
+        {
+          "idProduct": 7,
+          "quantityOrder": 2
+        }
+      ]
     }
   ],
   "products": [
@@ -123,7 +117,7 @@
         ""
       ],
       "sale": 15,
-      "quantity": 23,
+      "quantity": 22,
       "details": [
         "Công nghệ màn hình: Super AMOLED Plus",
         "Độ phân giải: Full HD+ (1080 x 2400 Pixels)",
@@ -207,7 +201,7 @@
         "2021/03/18/image-removebg-preview-8.png"
       ],
       "sale": 18,
-      "quantity": 3,
+      "quantity": 0,
       "details": [
         "Công nghệ màn hình: Super AMOLED",
         "Độ phân giải: Full HD (1080 x 2040 Pixels)",
@@ -236,7 +230,7 @@
         "2020/11/06/iphone-12-pro-max.png"
       ],
       "sale": 12,
-      "quantity": 12,
+      "quantity": 10,
       "details": [
         "Công nghệ màn hình: OLED",
         "Độ phân giải: 1284 x 2778 Pixels",
