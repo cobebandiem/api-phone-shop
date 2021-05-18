@@ -442,7 +442,7 @@ app.get('/sold', (req, res) => {
                         quantityOrder=item.quantityOrder;
                     }
                 })
-                return temp = { ...product, quantityOrder };
+                return { ...product, quantityOrder };
             });
             res.json({ result, isStatus: 1 });
         } else {
@@ -483,7 +483,7 @@ app.post('/sold', (req, res) => {
     cartsChecked.map((cart) => {
         let isCheck = false;
         sold.products.map((item, index) => {
-            isCheck = item.idProduct === cart.idProduct ? true : false;
+            isCheck = item.idProduct === cart.idProduct ? true : isCheck;
             if (isCheck) {
                 sold.products[index].quantityOrder += cart.quantityOrder;
             }
@@ -494,8 +494,6 @@ app.post('/sold', (req, res) => {
                 quantityOrder: cart.quantityOrder
             })
         };
-
-
     });
     //delete from carts
     let cartsNotChecked = carts.products.filter((cart) => cart.checked === false);
