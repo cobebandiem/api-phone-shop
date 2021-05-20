@@ -6,7 +6,7 @@
       "name": "huyduso11",
       "phone": "09447487438",
       "password": "123456",
-      "address": "huy du ngu so 1",
+      "address": "97 Man Thiện, Phường Hiệp Phú, Quận 9, TP.Hồ Chí Minh",
       "status": true,
       "image": "https://cobebandiem.github.io/cv/avatar.jpg",
       "role": true
@@ -18,7 +18,7 @@
       "password": "123456",
       "image": "https://cobebandiem.github.io/cv/avatar.jpg",
       "status": "true",
-      "address": "97 man thien quan 9 hcm",
+      "address": "97 Man Thiện, Phường Hiệp Phú, Quận 9, TP.Hồ Chí Minh",
       "id": 2,
       "role": false
     }

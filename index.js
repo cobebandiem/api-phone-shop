@@ -286,15 +286,11 @@ app.get('/countCarts', (req, res) => {
     let { id } = req.headers;
     id = parseInt(id);
     let count=0;
-    if (id) {
-        let carts = db.get('carts').find({ id: id }).value();
-        carts.products.map((cart)=>{
-            count+=cart.quantityOrder;
-        });
-        res.json({ isStatus: 0, count });
-    } else {
-        res.json({ isStatus: 0 });
-    }
+    let carts = db.get('carts').find({ id: id }).value();
+    carts.products.map((cart)=>{
+        count+=cart.quantityOrder;
+    });
+    res.json(count);
 });
 // app.post('/carts/:id',(req,res)=>{
 //     let id=parseInt(req.params.id);
