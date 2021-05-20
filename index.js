@@ -160,6 +160,11 @@ app.post('/users', (req, res) => {
             products: []
         }
         db.get('carts').push(cart).write();
+        let sold = {
+            id: parseInt(id),
+            products: []
+        }
+        db.get('sold').push(sold).write();
         res.json({
             isStatus: 1
         });
