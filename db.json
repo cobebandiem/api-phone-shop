@@ -81,12 +81,7 @@
   "sold": [
     {
       "id": 1,
-      "products": [
-        {
-          "idProduct": 4,
-          "quantityOrder": 3
-        }
-      ]
+      "products": []
     },
     {
       "id": 2,

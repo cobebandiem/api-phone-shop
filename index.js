@@ -543,7 +543,7 @@ app.post('/sold', (req, res) => {
         })
         return temp = { ...product, quantityOrder };
     });
-    res.json({ result, isStatus: 1 });
+    res.json({ result, isStatus: 1, cartsChecked});
 })
 
 app.delete('/sold', (req, res) => {
