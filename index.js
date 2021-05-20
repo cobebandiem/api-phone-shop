@@ -501,6 +501,7 @@ app.post('/sold', (req, res) => {
             isCheck = item.idProduct === cart.idProduct ? true : isCheck;
             if (isCheck) {
                 sold.products[index].quantityOrder += cart.quantityOrder;
+                isCheck=false;
             }
         });
         if (!isCheck) {
