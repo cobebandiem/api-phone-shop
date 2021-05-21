@@ -287,15 +287,22 @@ app.get('/carts', (req, res) => {
         res.json({ isStatus: 0 });
     }
 });
-app.get('/countCarts', (req, res) => {
-    let { id } = req.headers;
-    id = parseInt(id);
+app.get('/countCarts/:id', (req, res) => {
+    let id = parseInt(req.params.id);
     let count = 0;
     let carts = db.get('carts').find({ id: id }).value();
     carts.products.map((cart) => {
         count += cart.quantityOrder;
     });
     res.json(count);
+    // let { id } = req.headers;
+    // id = parseInt(id);
+    // let count = 0;
+    // let carts = db.get('carts').find({ id: id }).value();
+    // carts.products.map((cart) => {
+    //     count += cart.quantityOrder;
+    // });
+    // res.json(count);
 });
 // app.post('/carts/:id',(req,res)=>{
 //     let id=parseInt(req.params.id);
@@ -500,7 +507,7 @@ app.post('/sold', (req, res) => {
         sold.products.map((item, index) => {
             //isCheck = item.idProduct === cart.idProduct ? true : isCheck;
             if (item.idProduct === cart.idProduct) {
-                isCheck=true;
+                isCheck = true;
                 sold.products[index].quantityOrder += cart.quantityOrder;
             }
         });
@@ -543,7 +550,7 @@ app.post('/sold', (req, res) => {
         })
         return temp = { ...product, quantityOrder };
     });
-    res.json({ result, isStatus: 1, cartsChecked});
+    res.json({ result, isStatus: 1, cartsChecked });
 })
 
 app.delete('/sold', (req, res) => {
@@ -575,9 +582,7 @@ app.get('/brands', (req, res) => {
     brands = brands.filter((brand, index) => {
         return brands.indexOf(brand) === index;
     })
-    res.json({
-        brands: brands
-    });
+    res.json(brands);
 })
 
 // app.get('/', (req, res)=>{
