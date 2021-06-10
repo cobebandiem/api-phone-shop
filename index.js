@@ -26,27 +26,28 @@ app.use(cookieParser())
 
 
 app.get('/getcode', (req, res) => {
-    const transporter=nodemailer.createTransport({
-        service:"hotmail",
-        auth:{
-            user:"nad.test.001@outlook.com.vn",
-            pass:"1qw1qw1qw"
+    let { email } = req.headers;
+    const transporter = nodemailer.createTransport({
+        service: "hotmail",
+        auth: {
+            user: "nad.test.001@outlook.com.vn",
+            pass: "1qw1qw1qw"
         }
     });
-    var number = '' ;
-    for(let i=0;i<4;i++){
-        number+=Math.floor(Math.random() * 10); ;
+    var number = '';
+    for (let i = 0; i < 4; i++) {
+        number += Math.floor(Math.random() * 10);;
     }
-    const options={
-        from:"nad.test.001@outlook.com.vn",
-        to:"vandung130299@gmail.com",
-        subject:"Mã từ PhoneShop của bạn là:",
-        text:number
+    const options = {
+        from: "nad.test.001@outlook.com.vn",
+        to: email,
+        subject: "Mã từ PhoneShop:",
+        text: `code: ${number}`
     };
-    transporter.sendMail(options,function(err, info){
-        console.log('err:',err);
+    transporter.sendMail(options, function (err, info) {
+        console.log('err:', err);
         console.log(info);
-        if(info){
+        if (info) {
             res.json(number);
         }
         res.json("lỗi email xin lòng liên hệ quản trị viên!");
@@ -474,7 +475,6 @@ app.delete('/carts', (req, res) => {
 
 
 // RestFull api with sold
-
 app.get('/sold', (req, res) => {
     let { id_user } = req.headers;
     id_user = parseInt(id_user);
@@ -490,14 +490,30 @@ app.get('/sold', (req, res) => {
             });
             let result = arrProducts.map((product, index) => {
                 let quantityOrder = 0;
+                let date = null;
+                let address = null;
                 sold.products.map((item) => {
                     if (item.idProduct === product.id) {
                         quantityOrder = item.quantityOrder;
+                        date = item.date;
+                        address = item.addressSold;
                     }
                 })
-                return { ...product, quantityOrder };
+                return { ...product, quantityOrder, date, address };
             });
-            res.json({ result, isStatus: 1 });
+            var today = new Date();
+            var today1 = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+            let result1 = [];
+            result.map((item) => {
+                var timeDiff = ((new Date(today1) - new Date(item.date)));
+                console.log(item.date + ' - ' + today1)
+                var dayDiff = timeDiff / (1000 * 60 * 60 * 24);
+                console.log(dayDiff);
+                if (dayDiff > 3) {
+                    result1.push(item);
+                }
+            })
+            res.json({ result: result1, isStatus: 1 });
         } else {
             res.json({ isStatus: 1, result: [] });
         }
@@ -507,6 +523,152 @@ app.get('/sold', (req, res) => {
         })
     }
 });
+app.get('/confirm', (req, res) => {
+    let { id_user } = req.headers;
+    id_user = parseInt(id_user);
+    if (id_user) {
+        let sold = db.get('sold').find({ id: id_user }).value();
+        if (sold) {
+            let products = db.get('products').value();
+            let arrProductsSold = sold.products.map((item) => {
+                return item.idProduct;
+            });
+            let arrProducts = products.filter((product) => {
+                return arrProductsSold.includes(product.id);
+            });
+            let result = arrProducts.map((product, index) => {
+                let quantityOrder = 0;
+                let date = null;
+                let address = null;
+                sold.products.map((item) => {
+                    if (item.idProduct === product.id) {
+                        quantityOrder = item.quantityOrder;
+                        date = item.date;
+                        address = item.addressSold;
+                    }
+                })
+                return { ...product, quantityOrder, date, address };
+            });
+            var today = new Date();
+            var today1 = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+            let result1 = [];
+            result.map((item) => {
+                var timeDiff = ((new Date(today1) - new Date(item.date)));
+                console.log(item.date + ' - ' + today1)
+                var dayDiff = timeDiff / (1000 * 60 * 60 * 24);
+                console.log(dayDiff);
+                if (dayDiff == 1 || dayDiff == 0) {
+                    result1.push(item);
+                }
+            })
+            res.json({ result: result1, isStatus: 1 });
+        } else {
+            res.json({ isStatus: 1, result: [] });
+        }
+    } else {
+        res.json({
+            isStatus: 0
+        })
+    }
+});
+app.get('/getSold', (req, res) => {
+    let { id_user } = req.headers;
+    id_user = parseInt(id_user);
+    if (id_user) {
+        let sold = db.get('sold').find({ id: id_user }).value();
+        if (sold) {
+            let products = db.get('products').value();
+            let arrProductsSold = sold.products.map((item) => {
+                return item.idProduct;
+            });
+            let arrProducts = products.filter((product) => {
+                return arrProductsSold.includes(product.id);
+            });
+            let result = arrProducts.map((product, index) => {
+                let quantityOrder = 0;
+                let date = null;
+                let address = null;
+                sold.products.map((item) => {
+                    if (item.idProduct === product.id) {
+                        quantityOrder = item.quantityOrder;
+                        date = item.date;
+                        address = item.addressSold;
+                    }
+                })
+                return { ...product, quantityOrder, date, address };
+            });
+            var today = new Date();
+            var today1 = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+            let result1 = [];
+            result.map((item) => {
+                var timeDiff = ((new Date(today1) - new Date(item.date)));
+                console.log(item.date + ' - ' + today1)
+                var dayDiff = timeDiff / (1000 * 60 * 60 * 24);
+                console.log(dayDiff);
+                if (dayDiff == 2) {
+                    result1.push(item);
+                }
+            })
+            res.json({ result: result1, isStatus: 1 });
+        } else {
+            res.json({ isStatus: 1, result: [] });
+        }
+    } else {
+        res.json({
+            isStatus: 0
+        })
+    }
+});
+
+app.get('/delivering', (req, res) => {
+    let { id_user } = req.headers;
+    id_user = parseInt(id_user);
+    if (id_user) {
+        let sold = db.get('sold').find({ id: id_user }).value();
+        if (sold) {
+            let products = db.get('products').value();
+            let arrProductsSold = sold.products.map((item) => {
+                return item.idProduct;
+            });
+            let arrProducts = products.filter((product) => {
+                return arrProductsSold.includes(product.id);
+            });
+            let result = arrProducts.map((product, index) => {
+                let quantityOrder = 0;
+                let date = null;
+                let address = null;
+                sold.products.map((item) => {
+                    if (item.idProduct === product.id) {
+                        quantityOrder = item.quantityOrder;
+                        date = item.date;
+                        address = item.addressSold;
+                    }
+                })
+                return { ...product, quantityOrder, date, address };
+            });
+            var today = new Date();
+            var today1 = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+            let result1 = [];
+            result.map((item) => {
+                var timeDiff = ((new Date(today1) - new Date(item.date)));
+                console.log(item.date + ' - ' + today1)
+                var dayDiff = timeDiff / (1000 * 60 * 60 * 24);
+                console.log(dayDiff);
+                if (dayDiff == 3) {
+                    result1.push(item);
+                }
+            })
+            res.json({ result: result1, isStatus: 1 });
+        } else {
+            res.json({ isStatus: 1, result: [] });
+        }
+    } else {
+        res.json({
+            isStatus: 0
+        })
+    }
+});
+
 
 // app.post('/sold/:id',(req,res)=>{
 //     let id=parseInt(req.params.id);
@@ -520,10 +682,13 @@ app.get('/sold', (req, res) => {
 app.post('/sold', (req, res) => {
     let { id } = req.headers;
     id = parseInt(id);
+    let user = db.get('users').find({ id: id }).value();
     let carts = db.get('carts').find({ id: id }).value();
+    console.log(carts);
     let sold = db.get('sold').find({ id: id }).value();
     let products = db.get('products').value();
     let cartsChecked = carts.products.filter((cart) => cart.checked === true);
+
     //edit quantity on products when customer order
     products.map((product, index) => {
         cartsChecked.map((cart) => {
@@ -533,22 +698,19 @@ app.post('/sold', (req, res) => {
         })
     })
     //add from carts to sold
+    var today = new Date();
+    var today1 = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
     cartsChecked.map((cart) => {
-        let isCheck = false;
-        sold.products.map((item, index) => {
-            //isCheck = item.idProduct === cart.idProduct ? true : isCheck;
-            if (item.idProduct === cart.idProduct) {
-                isCheck = true;
-                sold.products[index].quantityOrder += cart.quantityOrder;
-            }
-        });
-        if (!isCheck) {
-            sold.products.push({
-                idProduct: cart.idProduct,
-                quantityOrder: cart.quantityOrder
-            })
-        };
+        let idSold = sold.products[sold.products.length - 1].id ? sold.products[sold.products.length - 1].id + 1 : 1;
+        sold.products.push({
+            id: idSold,
+            idProduct: cart.idProduct,
+            quantityOrder: cart.quantityOrder,
+            addressSold: user.address,
+            date: today1
+        })
     });
+
     //delete from carts
     let cartsNotChecked = carts.products.filter((cart) => cart.checked === false);
     let cartPerson = {
