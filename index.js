@@ -33,19 +33,19 @@ app.get('/getcode', (req, res) => {
             pass:"Dung12345"
         }
     });
+    var number = '' ;
+    for(let i=0;i<4;i++){
+        number+=Math.floor(Math.random() * 10); ;
+    }
     const options={
         from:"vandung130299@outlook.com.vn",
         to:"vandung130299@gmail.com",
-        subject:"Mã của bạn là:",
-        text:"1999"
+        subject:"Mã từ PhoneShop của bạn là:",
+        text:number
     };
     transporter.sendMail(options,function(err, info){
-        var number = '' ;
-        for(let i=0;i<4;i++){
-            number+=Math.floor(Math.random() * 10); ;
-        }
-        if(!err){
-            res.json(number);
+        if(info){
+            res.json(info);
         }
     })
 })
