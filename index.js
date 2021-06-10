@@ -4,6 +4,7 @@
 // const server = app.listen(process.env.PORT || 3000, () => {
 //     console.log(`SERVER running`);
 // });'
+const nodemailer = require('nodemailer');
 const express = require('express');
 const app = express();
 const server = app.listen(process.env.PORT || 3000, () => {
@@ -22,6 +23,33 @@ app.set('views', './views');
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
+
+
+app.get('/getcode', (req, res) => {
+    const transporter=nodemailer.createTransport({
+        service:"hotmail",
+        auth:{
+            user:"vandung130299@outlook.com.vn",
+            pass:"Dung12345"
+        }
+    });
+    const options={
+        from:"vandung130299@outlook.com.vn",
+        to:"vandung130299@gmail.com",
+        subject:"Mã của bạn là:",
+        text:"1999"
+    };
+    transporter.sendMail(options,function(err, info){
+        var number = '' ;
+        for(let i=0;i<4;i++){
+            number+=Math.floor(Math.random() * 10); ;
+        }
+        if(!err){
+            res.json(number);
+        }
+    })
+})
+
 
 
 // RestFull api with products
