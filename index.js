@@ -45,7 +45,7 @@ app.get('/getcode', (req, res) => {
     };
     transporter.sendMail(options,function(err, info){
         if(info){
-            res.json(info);
+            res.json(number);
         }
     })
 })
