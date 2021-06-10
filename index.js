@@ -29,8 +29,8 @@ app.get('/getcode', (req, res) => {
     const transporter=nodemailer.createTransport({
         service:"hotmail",
         auth:{
-            user:"vandung130299@outlook.com.vn",
-            pass:"Dung12345"
+            user:"nad.test.001@outlook.com.vn",
+            pass:"1qw1qw1qw"
         }
     });
     var number = '' ;
@@ -38,12 +38,14 @@ app.get('/getcode', (req, res) => {
         number+=Math.floor(Math.random() * 10); ;
     }
     const options={
-        from:"vandung130299@outlook.com.vn",
+        from:"nad.test.001@outlook.com.vn",
         to:"vandung130299@gmail.com",
         subject:"Mã từ PhoneShop của bạn là:",
         text:number
     };
     transporter.sendMail(options,function(err, info){
+        console.log('err:',err);
+        console.log(info);
         if(info){
             res.json(number);
         }
