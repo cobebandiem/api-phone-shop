@@ -47,6 +47,7 @@ app.get('/getcode', (req, res) => {
         if(info){
             res.json(number);
         }
+        res.json("lỗi email xin lòng liên hệ quản trị viên!");
     })
 })
 
