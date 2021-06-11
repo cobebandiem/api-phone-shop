@@ -39,7 +39,7 @@ app.get('/getcode', (req, res) => {
         number += Math.floor(Math.random() * 10);;
     }
     const options = {
-        from: "nad.test.001@outlook.com.vn",
+        from: "nad.test.002@outlook.com.vn",
         to: email,
         subject: "Mã từ PhoneShop:",
         text: `code: ${number}`
@@ -49,6 +49,9 @@ app.get('/getcode', (req, res) => {
         console.log(info);
         if (info) {
             res.json(number);
+        }
+        if(err){
+            res.json(err);
         }
         res.json("lỗi email xin lòng liên hệ quản trị viên!");
     })
