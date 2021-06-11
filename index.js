@@ -30,7 +30,7 @@ app.get('/getcode', (req, res) => {
     const transporter = nodemailer.createTransport({
         service: "hotmail",
         auth: {
-            user: "nad.test.001@outlook.com.vn",
+            user: "nad.test.002@outlook.com.vn",
             pass: "1qw1qw1qw"
         }
     });
