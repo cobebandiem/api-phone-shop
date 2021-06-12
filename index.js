@@ -24,13 +24,12 @@ app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 
-
 app.get('/getcode', (req, res) => {
     let { email } = req.headers;
     const transporter = nodemailer.createTransport({
         service: "hotmail",
         auth: {
-            user: "nad.test.002@outlook.com.vn",
+            user: "nad.test.003@outlook.com.vn",
             pass: "1qw1qw1qw"
         }
     });
@@ -39,7 +38,7 @@ app.get('/getcode', (req, res) => {
         number += Math.floor(Math.random() * 10);;
     }
     const options = {
-        from: "nad.test.002@outlook.com.vn",
+        from: "nad.test.003@outlook.com.vn",
         to: email,
         subject: "Mã từ PhoneShop:",
         text: `code: ${number}`
