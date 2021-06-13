@@ -53,7 +53,29 @@ app.get('/getcode', (req, res) => {
     })
 })
 
-
+app.get('/getByBrands', (req, res) => {
+    let products = db.get('products').value();
+    let brands = products.map((product) => { return product.brand });
+    brands = brands.filter((brand, index) => {
+        return brands.indexOf(brand) === index;
+    });
+    let result = {};
+    brands.map((item) => {
+        result[item] = products.filter((product) => {
+            return product.brand == item;
+        })
+    })
+    res.json(result);
+})
+app.get('/getByBrand', (req, res) => {
+    let { filter } = req.headers;
+    let products = db.get('products').value();
+    let result = {};
+    result[filter] = products.filter((product) => {
+        return product.brand.toLowerCase() == filter.toLowerCase();
+    })
+    res.json(result);
+})
 
 // RestFull api with products
 app.get('/', (req, res) => {
@@ -305,9 +327,9 @@ app.get('/carts', (req, res) => {
             let arrProducts = products.filter((product) => {
                 return arrProductsInCart.includes(product.id);
             });
-            console.log('arrProducts',arrProducts);
+            console.log('arrProducts', arrProducts);
             let result = arrProducts.map((product, index) => {
-                let index1=arrProductsInCart.findIndex(item=>product.id==item);
+                let index1 = arrProductsInCart.findIndex(item => product.id == item);
                 console.log(index1);
                 let quantityOrder = cart.products[index1].quantityOrder;
                 let checked = cart.products[index1].checked;
