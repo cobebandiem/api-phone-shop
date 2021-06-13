@@ -66,6 +66,11 @@
       "id": 2,
       "products": [
         {
+          "idProduct": 7,
+          "quantityOrder": 6,
+          "checked": true
+        },
+        {
           "idProduct": 6,
           "quantityOrder": 3,
           "checked": false
