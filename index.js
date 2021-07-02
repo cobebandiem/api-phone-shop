@@ -69,6 +69,9 @@ app.get('/getByBrands', (req, res) => {
 })
 app.get('/getByBrand', (req, res) => {
     let { filter } = req.headers;
+    filter = filter.normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/đ/g, 'd').replace(/Đ/g, 'D');
     let products = db.get('products').value();
     let result = {};
     result[filter] = products.filter((product) => {
@@ -168,7 +171,7 @@ app.get('/users', (req, res) => {
     if (id) {
         let user = db.get('users').find({ id: id }).value();
         if (user) {
-            res.json(user)
+            res.json({user, isStatus: 1})
         } else {
             res.json({
                 isStatus: 2
@@ -791,6 +794,7 @@ app.post('/soldCopy', (req, res) => {//mua hàng của huy đù
     //add from carts to sold
     var today = new Date();
     var today1 = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    console.log(today1)
     cartsChecked.map((cart) => {
         let idSold = sold.products[sold.products.length - 1].id ? sold.products[sold.products.length - 1].id + 1 : 1;
         sold.products.push({
