@@ -44,23 +44,7 @@
   "carts": [
     {
       "id": 1,
-      "products": [
-        {
-          "idProduct": 3,
-          "quantityOrder": 2,
-          "checked": false
-        },
-        {
-          "idProduct": 6,
-          "quantityOrder": 3,
-          "checked": false
-        },
-        {
-          "idProduct": 7,
-          "quantityOrder": 1,
-          "checked": true
-        }
-      ]
+      "products": []
     },
     {
       "id": 2,
@@ -81,7 +65,29 @@
   "sold": [
     {
       "id": 1,
-      "products": []
+      "products": [
+        {
+          "id": 1,
+          "idProduct": 3,
+          "quantityOrder": 1,
+          "addressSold": "97 Man Thiện, Phường Hiệp Phú, Quận 9, TP.Hồ Chí Minh",
+          "date": "2021-7-12"
+        },
+        {
+          "id": 2,
+          "idProduct": 4,
+          "quantityOrder": 1,
+          "addressSold": "97 Man Thiện, Phường Hiệp Phú, Quận 9, TP.Hồ Chí Minh",
+          "date": "2021-7-12"
+        },
+        {
+          "id": 3,
+          "idProduct": 3,
+          "quantityOrder": 1,
+          "addressSold": "97 Man Thiện, Phường Hiệp Phú, Quận 9, TP.Hồ Chí Minh",
+          "date": "2021-7-12"
+        }
+      ]
     },
     {
       "id": 2,
@@ -138,7 +144,7 @@
         ""
       ],
       "sale": 15,
-      "quantity": 17,
+      "quantity": 15,
       "details": [
         "Công nghệ màn hình: Super AMOLED Plus",
         "Độ phân giải: Full HD+ (1080 x 2400 Pixels)",
@@ -167,7 +173,7 @@
         "2020/11/06/apple-iphone-12-mini.png"
       ],
       "sale": 12,
-      "quantity": 8,
+      "quantity": 7,
       "details": [
         "Công nghệ màn hình: OLED",
         "Độ phân giải: 1170 x 2532 Pixels",
@@ -251,7 +257,7 @@
         "2020/11/06/iphone-12-pro-max.png"
       ],
       "sale": 12,
-      "quantity": 99,
+      "quantity": 98,
       "details": [
         "Công nghệ màn hình: OLED",
         "Độ phân giải: 1284 x 2778 Pixels",

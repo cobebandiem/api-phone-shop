@@ -52,7 +52,14 @@ app.get('/getcode', (req, res) => {
         res.json("lỗi email xin lòng liên hệ quản trị viên!");
     })
 })
-
+app.get('/getBrands', (req, res) => {
+    let products = db.get('products').value();
+    let brands = products.map((product) => { return product.brand });
+    brands = brands.filter((brand, index) => {
+        return brands.indexOf(brand) === index;
+    });
+    res.json(brands);
+})
 app.get('/getByBrands', (req, res) => {
     let products = db.get('products').value();
     let brands = products.map((product) => { return product.brand });
@@ -73,8 +80,8 @@ app.get('/getByBrand', (req, res) => {
         .replace(/[\u0300-\u036f]/g, '')
         .replace(/đ/g, 'd').replace(/Đ/g, 'D');
     let products = db.get('products').value();
-    let result = {};
-    result[filter] = products.filter((product) => {
+    let result = null;
+    result = products.filter((product) => {
         return product.brand.toLowerCase() == filter.toLowerCase();
     })
     res.json(result);
@@ -85,16 +92,43 @@ app.get('/', (req, res) => {
     const products = db.get('products').value()
     res.json(products);
 })
-
-app.get('/products', (req, res) => {
-    let products = db.get('products').value()
-    res.json(products);
+app.get('/productsByPageAndSearch', (req, res) => {
+    let { page, filterBy, size, brand } = req.query;
+    let products = db.get('products').value();
+    let result=null;
+    if(brand=='ALL'){
+        result=products;
+    }else{
+        result=products.filter((product) => {
+            return product.brand.toLowerCase() == brand.toLowerCase();
+        })
+    }
+    page = parseInt(page);
+    size = parseInt(size);
+    let result1 = result.slice((page - 1) * size, (page - 1) * size + size);
+    console.log('resukt', result1)
+    res.json(result1);
 })
 
 app.get('/products', (req, res) => {
-    let products = db.get('products').value()
+    let products = db.get('products').value();
     res.json(products);
 })
+
+app.get('/products1', (req, res) => {
+    const { brand } = req.query;
+    let products = db.get('products').value();
+    let result=null;
+    if(brand=='ALL'){
+        result=products;
+    }else{
+        result=products.filter((product) => {
+            return product.brand.toLowerCase() == brand.toLowerCase();
+        })
+    }
+    res.json(result);
+})
+
 app.get('/products/:id', (req, res) => {
     let id = parseInt(req.params.id);
     let product = db.get('products').find({ id: id }).value()
@@ -147,6 +181,7 @@ app.post('/login', (req, res) => {
         });
     }
 })
+
 app.post('/login1', (req, res) => {
     const { email, password } = req.headers;
     let user = db.get('users')
@@ -165,13 +200,12 @@ app.post('/login1', (req, res) => {
 })
 
 app.get('/users', (req, res) => {
-    console.log(req.headers)
     let { id } = req.headers;
     id = parseInt(id);
     if (id) {
         let user = db.get('users').find({ id: id }).value();
         if (user) {
-            res.json({user, isStatus: 1})
+            res.json({ user, isStatus: 1 })
         } else {
             res.json({
                 isStatus: 2
@@ -227,14 +261,12 @@ app.post('/users', (req, res) => {
     }
 })
 app.put('/users', (req, res) => {
-    console.log(req.headers)
     let { id, email, name, phone, address } = req.headers;
     id = parseInt(id);
     if (id) {
         let userCheckEmail = db.get('users').find({ email: email }).value() ? db.get('users').find({ email: email }).value() : { email: null };
         let userCheckPhone = db.get('users').find({ phone: phone }).value() ? db.get('users').find({ phone: phone }).value() : { phone: null };
         let user = db.get('users').find({ id: id }).value();
-        console.log(userCheckEmail)
         if (userCheckEmail.email !== user.email && userCheckEmail.email) {
             res.json({
                 isStatus: 2
@@ -265,7 +297,6 @@ app.put('/users', (req, res) => {
     }
 })
 app.put('/password', (req, res) => {
-    console.log(req.headers)
     let { id, new_password, old_password } = req.headers;
     id = parseInt(id);
     if (id) {
@@ -708,6 +739,7 @@ app.get('/delivering', (req, res) => {//đang giao hàng
 
 app.post('/sold', (req, res) => {
     let { id } = req.headers;
+    console.log('reqsda', req.headers)
     id = parseInt(id);
     let user = db.get('users').find({ id: id }).value();
     let carts = db.get('carts').find({ id: id }).value();
@@ -778,7 +810,6 @@ app.post('/soldCopy', (req, res) => {//mua hàng của huy đù
     id = parseInt(id);
     let user = db.get('users').find({ id: id }).value();
     let carts = db.get('carts').find({ id: id }).value();
-    console.log(carts);
     let sold = db.get('sold').find({ id: id }).value();
     let products = db.get('products').value();
     let cartsChecked = carts.products;
@@ -794,9 +825,10 @@ app.post('/soldCopy', (req, res) => {//mua hàng của huy đù
     //add from carts to sold
     var today = new Date();
     var today1 = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-    console.log(today1)
+    console.log(sold.products )
     cartsChecked.map((cart) => {
-        let idSold = sold.products[sold.products.length - 1].id ? sold.products[sold.products.length - 1].id + 1 : 1;
+
+        let idSold = sold.products[sold.products.length - 1]?.id ? sold.products[sold.products.length - 1].id + 1 : 1;
         sold.products.push({
             id: idSold,
             idProduct: cart.idProduct,
@@ -841,27 +873,27 @@ app.post('/soldCopy', (req, res) => {//mua hàng của huy đù
     res.json({ result, isStatus: 1, cartsChecked });
 })
 
-app.delete('/sold', (req, res) => {
-    let { id_user, id } = req.headers;
-    id_user = parseInt(id_user);
-    if (id_user) {
-        let idProduct = parseInt(id);
-        let cart = db.get('sold').find({ id: id_user }).value();
-        let indexZ = null;
-        cart.products.filter((product, index) => {
-            if (product.idProduct === idProduct) {
-                indexZ = index;
-                return product.idProduct;
-            }
-        });
-        cart.products.splice(indexZ, 1);
-        let carts = db.get('sold')
-            .find({ id: id_user })
-            .assign(cart)
-            .write()
-        res.json(carts);
-    }
-})
+// app.delete('/sold', (req, res) => {
+//     let { id_user, id } = req.headers;
+//     id_user = parseInt(id_user);
+//     if (id_user) {
+//         let idProduct = parseInt(id);
+//         let cart = db.get('sold').find({ id: id_user }).value();
+//         let indexZ = null;
+//         cart.products.filter((product, index) => {
+//             if (product.idProduct === idProduct) {
+//                 indexZ = index;
+//                 return product.idProduct;
+//             }
+//         });
+//         cart.products.splice(indexZ, 1);
+//         let carts = db.get('sold')
+//             .find({ id: id_user })
+//             .assign(cart)
+//             .write()
+//         res.json(carts);
+//     }
+// })
 
 
 app.get('/brands', (req, res) => {
