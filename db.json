@@ -4,7 +4,7 @@
       "id": 1,
       "email": "dung51234567890@gmail.com",
       "name": "Tmfhu41jIEh1eQ==",
-      "phone": "09447487438",
+      "phone": "09447487431",
       "password": "123456",
       "address": "OTcgTWFuIFRoaeG7h24sIFBoxrDhu51uZyBIaeG7h3AgUGjDuiwgUXXhuq1uIDksIFRQLkjhu5MgQ2jDrSBNaW5o",
       "status": true,
@@ -20,6 +20,17 @@
       "status": "true",
       "address": "OTcgTWFuIFRoaeG7h24sIFBoxrDhu51uZyBIaeG7h3AgUGjDuiwgUXXhuq1uIDksIFRQLkjhu5MgQ2jDrSBNaW5o",
       "id": 2,
+      "role": false
+    },
+    {
+      "id": 3,
+      "name": "ZHVuZyB0ZXN0",
+      "password": "123456",
+      "address": "OTcgTWFuIFRoaeG7h24sIFBoxrDhu51uZyBIaeG7h3AgUGjDuiwgUXXhuq1uIDksIFRQLkjhu5MgQ2jDrSBNaW5o",
+      "phone": "094474874",
+      "email": "dungtest@gmail.com",
+      "image": "https://cobebandiem.github.io/cv/avatar.jpg",
+      "status": true,
       "role": false
     }
   ],
@@ -49,11 +60,20 @@
           "idProduct": 3,
           "quantityOrder": 2,
           "checked": true
+        },
+        {
+          "idProduct": 4,
+          "quantityOrder": 1,
+          "checked": true
         }
       ]
     },
     {
       "id": 2,
+      "products": []
+    },
+    {
+      "id": 3,
       "products": []
     }
   ],
@@ -65,21 +85,21 @@
           "id": 1,
           "idProduct": 3,
           "quantityOrder": 1,
-          "addressSold": "97 Man Thiện, Phường Hiệp Phú, Quận 9, TP.Hồ Chí Minh",
+          "addressSold": "OTcgTWFuIFRoaeG7h24sIFBoxrDhu51uZyBIaeG7h3AgUGjDuiwgUXXhuq1uIDksIFRQLkjhu5MgQ2jDrSBNaW5o",
           "date": "2021-7-12"
         },
         {
           "id": 2,
           "idProduct": 4,
           "quantityOrder": 1,
-          "addressSold": "97 Man Thiện, Phường Hiệp Phú, Quận 9, TP.Hồ Chí Minh",
+          "addressSold": "OTcgTWFuIFRoaeG7h24sIFBoxrDhu51uZyBIaeG7h3AgUGjDuiwgUXXhuq1uIDksIFRQLkjhu5MgQ2jDrSBNaW5o",
           "date": "2021-7-12"
         },
         {
           "id": 3,
           "idProduct": 3,
           "quantityOrder": 1,
-          "addressSold": "97 Man Thiện, Phường Hiệp Phú, Quận 9, TP.Hồ Chí Minh",
+          "addressSold": "OTcgTWFuIFRoaeG7h24sIFBoxrDhu51uZyBIaeG7h3AgUGjDuiwgUXXhuq1uIDksIFRQLkjhu5MgQ2jDrSBNaW5o",
           "date": "2021-7-12"
         }
       ]
@@ -91,43 +111,69 @@
           "id": 1,
           "idProduct": 7,
           "quantityOrder": 2,
-          "addressSold": "97 Man Thiện, Phường Hiệp Phú, Quận 9, TP.Hồ Chí Minh",
+          "addressSold": "OTcgTWFuIFRoaeG7h24sIFBoxrDhu51uZyBIaeG7h3AgUGjDuiwgUXXhuq1uIDksIFRQLkjhu5MgQ2jDrSBNaW5o",
           "date": "2021-6-10"
         },
         {
           "id": 2,
           "idProduct": 8,
           "quantityOrder": 2,
-          "addressSold": "97 Man Thiện, Phường Hiệp Phú, Quận 9, TP.Hồ Chí Minh",
+          "addressSold": "OTcgTWFuIFRoaeG7h24sIFBoxrDhu51uZyBIaeG7h3AgUGjDuiwgUXXhuq1uIDksIFRQLkjhu5MgQ2jDrSBNaW5o",
           "date": "2021-6-2"
         },
         {
           "id": 3,
           "idProduct": 3,
           "quantityOrder": 1,
-          "addressSold": "97 Man Thiện, Phường Hiệp Phú, Quận 9, TP.Hồ Chí Minh",
+          "addressSold": "OTcgTWFuIFRoaeG7h24sIFBoxrDhu51uZyBIaeG7h3AgUGjDuiwgUXXhuq1uIDksIFRQLkjhu5MgQ2jDrSBNaW5o",
           "date": "2021-6-10"
         },
         {
           "id": 4,
           "idProduct": 3,
           "quantityOrder": 1,
-          "addressSold": "97 Man Thiện, Phường Hiệp Phú, Quận 9, TP.Hồ Chí Minh",
+          "addressSold": "OTcgTWFuIFRoaeG7h24sIFBoxrDhu51uZyBIaeG7h3AgUGjDuiwgUXXhuq1uIDksIFRQLkjhu5MgQ2jDrSBNaW5o",
           "date": "2021-6-10"
         },
         {
           "id": 5,
           "idProduct": 7,
           "quantityOrder": 6,
-          "addressSold": "97 Man Thiện, Phường Hiệp Phú, Quận 9, TP.Hồ Chí Minh",
+          "addressSold": "OTcgTWFuIFRoaeG7h24sIFBoxrDhu51uZyBIaeG7h3AgUGjDuiwgUXXhuq1uIDksIFRQLkjhu5MgQ2jDrSBNaW5o",
           "date": "2021-7-14"
         },
         {
           "id": 6,
           "idProduct": 6,
           "quantityOrder": 3,
-          "addressSold": "97 Man Thiện, Phường Hiệp Phú, Quận 9, TP.Hồ Chí Minh",
+          "addressSold": "OTcgTWFuIFRoaeG7h24sIFBoxrDhu51uZyBIaeG7h3AgUGjDuiwgUXXhuq1uIDksIFRQLkjhu5MgQ2jDrSBNaW5o",
           "date": "2021-7-14"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "products": [
+        {
+          "id": 1,
+          "idProduct": 3,
+          "quantityOrder": 1,
+          "addressSold": "OTcgTWFuIFRoaeG7h24sIFBoxrDhu51uZyBIaeG7h3AgUGjDuiwgUXXhuq1uIDksIFRQLkjhu5MgQ2jDrSBNaW5o",
+          "date": "2021-7-15"
+        },
+        {
+          "id": 2,
+          "idProduct": 3,
+          "quantityOrder": 1,
+          "addressSold": "OTcgTWFuIFRoaeG7h24sIFBoxrDhu51uZyBIaeG7h3AgUGjDuiwgUXXhuq1uIDksIFRQLkjhu5MgQ2jDrSBNaW5o",
+          "date": "2021-7-15"
+        },
+        {
+          "id": 3,
+          "idProduct": 4,
+          "quantityOrder": 1,
+          "addressSold": "OTcgTWFuIFRoaeG7h24sIFBoxrDhu51uZyBIaeG7h3AgUGjDuiwgUXXhuq1uIDksIFRQLkjhu5MgQ2jDrSBNaW5o",
+          "date": "2021-7-15"
         }
       ]
     }
@@ -135,7 +181,7 @@
   "products": [
     {
       "id": 3,
-      "name": "Điện thoại di động Samsung Galaxy Note 20 - Chính hãng",
+      "name": "Galaxy Note 20 - Chính hãng",
       "brand": "samsung",
       "description": [
         "Có thể nói, những thiết kế của Samsung luôn khiến cộng đồng đam mê công nghệ phải say mê khi vô cùng tinh tế cùng với những gam màu sang trọng. Thế hệ Samsung Galaxy Note năm 2020 sở hữu thiết kế kim loại nguyên khối, mặt lưng được làm từ kính cường lực giúp tăng độ bóng bẩy cho smartphone, mang đến vẻ ngoài đẳng cấp. Note 20 có kiểu dáng mạnh mẽ và có phần nam tính hơn với những góc cạnh vuông vức, mang đến cảm giác cầm tay chắc chắn",
@@ -153,7 +199,7 @@
         ""
       ],
       "sale": 15,
-      "quantity": 15,
+      "quantity": 13,
       "details": [
         "Công nghệ màn hình: Super AMOLED Plus",
         "Độ phân giải: Full HD+ (1080 x 2400 Pixels)",
@@ -182,7 +228,7 @@
         "2020/11/06/apple-iphone-12-mini.png"
       ],
       "sale": 12,
-      "quantity": 7,
+      "quantity": 6,
       "details": [
         "Công nghệ màn hình: OLED",
         "Độ phân giải: 1170 x 2532 Pixels",

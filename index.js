@@ -219,6 +219,7 @@ app.get('/users', (req, res) => {
 })
 
 app.post('/users', (req, res) => {
+    console.log(req.headers);
     let users = db.get('users').value();
     let id = parseInt(users[users.length - 1].id) + 1;
     const { email, name, password, phone, address } = req.headers;
@@ -262,6 +263,7 @@ app.post('/users', (req, res) => {
 })
 app.put('/users', (req, res) => {
     let { id, email, name, phone, address } = req.headers;
+    console.log(Buffer.from(address).toString('base64'));
     id = parseInt(id);
     if (id) {
         let userCheckEmail = db.get('users').find({ email: email }).value() ? db.get('users').find({ email: email }).value() : { email: null };
@@ -691,18 +693,17 @@ app.get('/soldCopy', (req, res) => {//get all
             let arrProducts = products.filter((product) => {
                 return arrProductsSold.includes(product.id);
             });
-            let result = arrProducts.map((product, index) => {
-                let quantityOrder = 0;
-                let date = null;
-                let address = null;
-                sold.products.map((item) => {
-                    if (item.idProduct === product.id) {
-                        quantityOrder = item.quantityOrder;
-                        date = item.date;
-                        address = item.addressSold;
+            console.log('arrProductsSold',sold.products);
+            console.log('arrProducts',arrProducts);
+            let result = sold.products.map((product, index) => {
+                let productTemp =null;
+                arrProducts.map((item) => {
+                    if (item.id === product.idProduct) {
+                        // console.log({ ...product, ...item})
+                        productTemp={ ...product, ...item};
                     }
                 })
-                return { ...product, quantityOrder, date, address };
+                return productTemp;
             });
             res.json({ result: result, isStatus: 1 });
         } else {
