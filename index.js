@@ -678,6 +678,42 @@ app.get('/getSold', (req, res) => {//chờ lấy hàng
     }
 });
 
+app.get('/soldCopy', (req, res) => {//get all
+    let { id_user } = req.headers;
+    id_user = parseInt(id_user);
+    if (id_user) {
+        let sold = db.get('sold').find({ id: id_user }).value();
+        if (sold) {
+            let products = db.get('products').value();
+            let arrProductsSold = sold.products.map((item) => {
+                return item.idProduct;
+            });
+            let arrProducts = products.filter((product) => {
+                return arrProductsSold.includes(product.id);
+            });
+            let result = arrProducts.map((product, index) => {
+                let quantityOrder = 0;
+                let date = null;
+                let address = null;
+                sold.products.map((item) => {
+                    if (item.idProduct === product.id) {
+                        quantityOrder = item.quantityOrder;
+                        date = item.date;
+                        address = item.addressSold;
+                    }
+                })
+                return { ...product, quantityOrder, date, address };
+            });
+            res.json({ result: result, isStatus: 1 });
+        } else {
+            res.json({ isStatus: 1, result: [] });
+        }
+    } else {
+        res.json({
+            isStatus: 0
+        })
+    }
+});
 app.get('/delivering', (req, res) => {//đang giao hàng
     let { id_user } = req.headers;
     id_user = parseInt(id_user);
@@ -737,73 +773,73 @@ app.get('/delivering', (req, res) => {//đang giao hàng
 //     res.json(sold);
 // })
 
-app.post('/sold', (req, res) => {
-    let { id } = req.headers;
-    console.log('reqsda', req.headers)
-    id = parseInt(id);
-    let user = db.get('users').find({ id: id }).value();
-    let carts = db.get('carts').find({ id: id }).value();
-    console.log(carts);
-    let sold = db.get('sold').find({ id: id }).value();
-    let products = db.get('products').value();
-    let cartsChecked = carts.products.filter((cart) => cart.checked === true);
+// app.post('/sold', (req, res) => {
+//     let { id } = req.headers;
+//     console.log('reqsda', req.headers)
+//     id = parseInt(id);
+//     let user = db.get('users').find({ id: id }).value();
+//     let carts = db.get('carts').find({ id: id }).value();
+//     console.log(carts);
+//     let sold = db.get('sold').find({ id: id }).value();
+//     let products = db.get('products').value();
+//     let cartsChecked = carts.products.filter((cart) => cart.checked === true);
 
-    //edit quantity on products when customer order
-    products.map((product, index) => {
-        cartsChecked.map((cart) => {
-            if (cart.idProduct === product.id) {
-                products[index].quantity -= cart.quantityOrder;
-            }
-        })
-    })
-    //add from carts to sold
-    var today = new Date();
-    var today1 = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-    cartsChecked.map((cart) => {
-        let idSold = sold.products[sold.products.length - 1].id ? sold.products[sold.products.length - 1].id + 1 : 1;
-        sold.products.push({
-            id: idSold,
-            idProduct: cart.idProduct,
-            quantityOrder: cart.quantityOrder,
-            addressSold: user.address,
-            date: today1
-        })
-    });
+//     //edit quantity on products when customer order
+//     products.map((product, index) => {
+//         cartsChecked.map((cart) => {
+//             if (cart.idProduct === product.id) {
+//                 products[index].quantity -= cart.quantityOrder;
+//             }
+//         })
+//     })
+//     //add from carts to sold
+//     var today = new Date();
+//     var today1 = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+//     cartsChecked.map((cart) => {
+//         let idSold = sold.products[sold.products.length - 1].id ? sold.products[sold.products.length - 1].id + 1 : 1;
+//         sold.products.push({
+//             id: idSold,
+//             idProduct: cart.idProduct,
+//             quantityOrder: cart.quantityOrder,
+//             addressSold: user.address,
+//             date: today1
+//         })
+//     });
 
-    //delete from carts
-    let cartsNotChecked = carts.products.filter((cart) => cart.checked === false);
-    let cartPerson = {
-        id,
-        products: cartsNotChecked
-    }
-    db.get('carts')
-        .find({ id })
-        .assign(cartPerson)
-        .write()
-    db.get('sold')
-        .find({ id })
-        .assign(sold)
-        .write()
-    db.get('products')
-        .assign(products)
-        .write()
-    let arrProductsSold = sold.products.map((item) => {
-        return item.idProduct;
-    });
-    let arrProducts = products.filter((product) => {
-        return arrProductsSold.includes(product.id);
-    });
-    let result = arrProducts.map((product, index) => {
-        let quantityOrder = 0;
-        sold.products.map((item) => {
-            if (item.idProduct === product.id) {
-                quantityOrder = item.quantityOrder;
-            }
-        })
-        return temp = { ...product, quantityOrder };
-    });
-    res.json({ result, isStatus: 1, cartsChecked });
-})
+//     //delete from carts
+//     let cartsNotChecked = carts.products.filter((cart) => cart.checked === false);
+//     let cartPerson = {
+//         id,
+//         products: cartsNotChecked
+//     }
+//     db.get('carts')
+//         .find({ id })
+//         .assign(cartPerson)
+//         .write()
+//     db.get('sold')
+//         .find({ id })
+//         .assign(sold)
+//         .write()
+//     db.get('products')
+//         .assign(products)
+//         .write()
+//     let arrProductsSold = sold.products.map((item) => {
+//         return item.idProduct;
+//     });
+//     let arrProducts = products.filter((product) => {
+//         return arrProductsSold.includes(product.id);
+//     });
+//     let result = arrProducts.map((product, index) => {
+//         let quantityOrder = 0;
+//         sold.products.map((item) => {
+//             if (item.idProduct === product.id) {
+//                 quantityOrder = item.quantityOrder;
+//             }
+//         })
+//         return temp = { ...product, quantityOrder };
+//     });
+//     res.json({ result, isStatus: 1, cartsChecked });
+// })
 
 app.post('/soldCopy', (req, res) => {//mua hàng của huy đù
     let { id } = req.headers;

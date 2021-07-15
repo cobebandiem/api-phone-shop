@@ -3,22 +3,22 @@
     {
       "id": 1,
       "email": "dung51234567890@gmail.com",
-      "name": "huyduso11",
+      "name": "Tmfhu41jIEh1eQ==",
       "phone": "09447487438",
       "password": "123456",
-      "address": "97 Man Thiện, Phường Hiệp Phú, Quận 9, TP.Hồ Chí Minh",
+      "address": "OTcgTWFuIFRoaeG7h24sIFBoxrDhu51uZyBIaeG7h3AgUGjDuiwgUXXhuq1uIDksIFRQLkjhu5MgQ2jDrSBNaW5o",
       "status": true,
       "image": "https://cobebandiem.github.io/cv/avatar.jpg",
       "role": true
     },
     {
       "email": "vandung130299@gmail.com",
-      "name": "huydu",
+      "name": "S3UgQsOsbmg=",
       "phone": "0944748743",
       "password": "123456",
       "image": "https://cobebandiem.github.io/cv/avatar.jpg",
       "status": "true",
-      "address": "97 Man Thiện, Phường Hiệp Phú, Quận 9, TP.Hồ Chí Minh",
+      "address": "OTcgTWFuIFRoaeG7h24sIFBoxrDhu51uZyBIaeG7h3AgUGjDuiwgUXXhuq1uIDksIFRQLkjhu5MgQ2jDrSBNaW5o",
       "id": 2,
       "role": false
     }
@@ -44,22 +44,17 @@
   "carts": [
     {
       "id": 1,
-      "products": []
+      "products": [
+        {
+          "idProduct": 3,
+          "quantityOrder": 2,
+          "checked": true
+        }
+      ]
     },
     {
       "id": 2,
-      "products": [
-        {
-          "idProduct": 7,
-          "quantityOrder": 6,
-          "checked": true
-        },
-        {
-          "idProduct": 6,
-          "quantityOrder": 3,
-          "checked": false
-        }
-      ]
+      "products": []
     }
   ],
   "sold": [
@@ -119,6 +114,20 @@
           "quantityOrder": 1,
           "addressSold": "97 Man Thiện, Phường Hiệp Phú, Quận 9, TP.Hồ Chí Minh",
           "date": "2021-6-10"
+        },
+        {
+          "id": 5,
+          "idProduct": 7,
+          "quantityOrder": 6,
+          "addressSold": "97 Man Thiện, Phường Hiệp Phú, Quận 9, TP.Hồ Chí Minh",
+          "date": "2021-7-14"
+        },
+        {
+          "id": 6,
+          "idProduct": 6,
+          "quantityOrder": 3,
+          "addressSold": "97 Man Thiện, Phường Hiệp Phú, Quận 9, TP.Hồ Chí Minh",
+          "date": "2021-7-14"
         }
       ]
     }
@@ -228,7 +237,7 @@
         "2021/03/18/image-removebg-preview-8.png"
       ],
       "sale": 18,
-      "quantity": 13,
+      "quantity": 10,
       "details": [
         "Công nghệ màn hình: Super AMOLED",
         "Độ phân giải: Full HD (1080 x 2040 Pixels)",
@@ -257,7 +266,7 @@
         "2020/11/06/iphone-12-pro-max.png"
       ],
       "sale": 12,
-      "quantity": 98,
+      "quantity": 92,
       "details": [
         "Công nghệ màn hình: OLED",
         "Độ phân giải: 1284 x 2778 Pixels",
@@ -294,6 +303,23 @@
         "RAM: 3 GB",
         "Dung lượng pin: 5000 mAh"
       ]
+    },
+    {
+      "id": 9,
+      "name": "dung test",
+      "brand": "samsung",
+      "description": [
+        "khong"
+      ],
+      "details": [
+        "khong"
+      ],
+      "color": "black",
+      "images": [
+        "logo.png"
+      ],
+      "price": "100000",
+      "sale": "1"
     }
   ]
 }
